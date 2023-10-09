@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "231034076515",
+    "project_id": "boarding-admissions",
+    "storage_bucket": "boarding-admissions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231034076515:android:cb30a1ce99e97af3c56756",
+        "android_client_info": {
+          "package_name": "com.example.boardingadmissions"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVWrB9v-jqhkurev2Bbqf8bRyskX1djWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,22 +1,26 @@
-
+import 'package:boardingadmissions/chat.dart';
 import 'package:boardingadmissions/home_page.dart';
-// import 'package:boardingadmissions/home_page.dart';
+import 'package:boardingadmissions/login_page.dart';
+import 'package:boardingadmissions/notification.dart';
+import 'package:boardingadmissions/profile_page.dart';
+import 'package:boardingadmissions/schools_detail_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
-// import 'package:boardingadmissions/landing_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+//
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key})
-      : super(key: key); // Use 'Key?' instead of 'super.key'
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(), // Remove 'const' from LandingPage()
+      home: HomePage(),
     );
   }
 }

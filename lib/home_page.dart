@@ -1,7 +1,9 @@
 import 'package:boardingadmissions/chat.dart';
+import 'package:boardingadmissions/components/sample_classes.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:boardingadmissions/profile_page.dart';
+import 'package:boardingadmissions/hamburger_screen.dart';
 
 class FaqItem {
   final String question;
@@ -20,8 +22,15 @@ class HomePage extends StatefulWidget {
   HomePageState createState() => HomePageState();
 }
 
+
 class HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+    final PageController _pageController = PageController(initialPage: 0); 
+    @override
+  void dispose() {
+    _pageController.dispose(); // Dispose the PageController
+    super.dispose();
+  }
 
   final List<String> imageUrls = [
     'image1.png',
@@ -68,6 +77,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 76,
         elevation: 0,
         flexibleSpace: Container(
@@ -82,7 +92,7 @@ class HomePageState extends State<HomePage> {
               ],
               stops: const [
                 0.0,
-                0.8,
+                1,
               ],
             ),
           ),
@@ -104,14 +114,23 @@ class HomePageState extends State<HomePage> {
                     IconButton(
                       icon: const Icon(Icons.search,
                           size: 30, color: Color.fromRGBO(2, 84, 152, 1)),
-                      onPressed: () {
-                        // Handle search icon press
+                      onPressed: ()=> {
+                        Container(
+                          child: SearchBar(
+                            
+                          ),
+                        )
+                        
                       },
                     ),
                     IconButton(
                       icon: const Icon(Icons.menu,
                           size: 30, color: Color.fromRGBO(2, 84, 152, 1)),
                       onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MenuScreen()));
                         // Handle notifications icon press
                       },
                     ),
@@ -143,20 +162,82 @@ class HomePageState extends State<HomePage> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _currentIndex = 0;
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                  elevation: _currentIndex == 0 ? 4 : 0,
+                  shadowColor: Colors.black,
+                  backgroundColor: Colors.white // Elevation when selected
+                  ),
+              child: Icon(Icons.home),
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _currentIndex = 1;
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                  elevation: _currentIndex == 1 ? 4 : 0,
+                  shadowColor: Colors.black,
+                  backgroundColor: Colors.white // Elevation when selected
+                  ),
+              child: Icon(Icons.person),
+            ),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
+            icon: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _currentIndex = 2;
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                  elevation: _currentIndex == 2 ? 4 : 0,
+                  shadowColor: Colors.black,
+                  backgroundColor: Colors.white // Elevation when selected
+                  ),
+              child: Icon(Icons.notifications),
+            ),
             label: 'Notifications',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Settings',
+            icon: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _currentIndex = 3;
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                elevation: _currentIndex == 3 ? 4 : 0,
+                shadowColor: Colors.black,
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+
+                // Elevation when selected
+              ),
+              child: Column(children: [
+                Icon(
+                  Icons.chat_bubble_outline,
+                ),
+                Text(
+                  "chat",
+                  style: TextStyle(
+                      color: _currentIndex == 3 ? Colors.blue : Colors.white),
+                )
+              ]),
+            ),
+            label: '',
           ),
         ],
       ),
@@ -213,6 +294,7 @@ class HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 20),
+          SampleClasses(),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Row(
@@ -236,11 +318,13 @@ class HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         title.split('-')[0],
-                        style: const TextStyle(color: Colors.blue, fontSize: 16),
+                        style:
+                            const TextStyle(color: Colors.blue, fontSize: 16),
                       ),
                       Text(
                         title.split('-')[1],
-                        style: const TextStyle(color: Colors.blue, fontSize: 12),
+                        style:
+                            const TextStyle(color: Colors.blue, fontSize: 12),
                       ),
                     ],
                   ),
