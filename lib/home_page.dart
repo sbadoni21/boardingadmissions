@@ -22,33 +22,32 @@ class HomePage extends StatefulWidget {
   HomePageState createState() => HomePageState();
 }
 
-
 class HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-    final PageController _pageController = PageController(initialPage: 0); 
-    @override
+  final PageController _pageController = PageController(initialPage: 0);
+  @override
   void dispose() {
     _pageController.dispose(); // Dispose the PageController
     super.dispose();
   }
 
   final List<String> imageUrls = [
-    'image1.png',
-    'image1.png',
-    'image1.png',
+    'assets/image1.png',
+    'assets/image1.png',
+    'assets/image1.png',
   ];
 
   final List<Map<String, String>> imageSchools = [
-    {"schoolName": "School 1", "imageUrl": "school2.png"},
-    {"schoolName": "School 2", "imageUrl": "school2.png"},
-    {"schoolName": "School 3", "imageUrl": "school2.png"},
+    {"schoolName": "School 1", "imageUrl": "assets/school2.png"},
+    {"schoolName": "School 2", "imageUrl": "assets/school2.png"},
+    {"schoolName": "School 3", "imageUrl": "assets/school2.png"},
   ];
 
   final List<Map<String, String>> dreamSchools = [
-    {"schoolName": "School 1", "imageUrl": "school2.png"},
-    {"schoolName": "School 2", "imageUrl": "school4.png"},
-    {"schoolName": "School 3", "imageUrl": "school5.png"},
-    {"schoolName": "School 4", "imageUrl": "school6.png"},
+    {"schoolName": "School 1", "imageUrl": "assets/school2.png"},
+    {"schoolName": "School 2", "imageUrl": "assets/school4.png"},
+    {"schoolName": "School 3", "imageUrl": "assets/school5.png"},
+    {"schoolName": "School 4", "imageUrl": "assets/school6.png"},
   ];
 
   final List<String> buttonTitles = [
@@ -60,7 +59,7 @@ class HomePageState extends State<HomePage> {
 
   final List<FaqItem> faqItems = [
     FaqItem(
-      question: "Question 1",
+      question: "Questin 1",
       answer: "Answer 1",
     ),
     FaqItem(
@@ -102,7 +101,7 @@ class HomePageState extends State<HomePage> {
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Image.asset(
-                  'logo.png',
+                  'assets/logo.png',
                   height: 100,
                   width: 100,
                 ),
@@ -114,13 +113,14 @@ class HomePageState extends State<HomePage> {
                     IconButton(
                       icon: const Icon(Icons.search,
                           size: 30, color: Color.fromRGBO(2, 84, 152, 1)),
-                      onPressed: ()=> {
+                      onPressed: () => {
                         Container(
+                          width: 100,
+                          height: 30,
                           child: SearchBar(
-                            
+                            hintText: "search here" ,
                           ),
                         )
-                        
                       },
                     ),
                     IconButton(
@@ -561,3 +561,4 @@ class HomePageState extends State<HomePage> {
     );
   }
 }
+

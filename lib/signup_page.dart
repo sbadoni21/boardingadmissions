@@ -175,7 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 width: 30,
                 // decoration: BoxDecoration(color: Colors.blue),
                 child: Image.asset(
-                  'googlelogo.png', // Correct image asset path
+                  'assets/googlelogo.png', // Correct image asset path
                   fit: BoxFit.fitWidth,
                 ),
               ),

@@ -26,7 +26,7 @@ class ProfilePageState extends State<ProfilePage> {
                     borderRadius: BorderRadius.circular(
                         15.0), // Adjust the radius as needed
                     child: Image.asset(
-                      'bgimage.png', // Replace with your background image URL
+                      'assets/bgimage.png', // Replace with your background image URL
                       width: double.infinity,
                       height: 150,
                       fit: BoxFit.cover,
@@ -51,7 +51,7 @@ class ProfilePageState extends State<ProfilePage> {
                       ),
                       child: ClipOval(
                         child: Image.asset(
-                          'school2.png', // Replace with your profile image URL
+                          'assets/school2.png', // Replace with your profile image URL
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -104,7 +104,7 @@ class ProfilePageState extends State<ProfilePage> {
                           children: [
                             IconButton(
                               onPressed: () {},
-                              icon:const  Icon(Icons.note_add_outlined),
+                              icon: const Icon(Icons.note_add_outlined),
                               color: Colors.blue,
                               iconSize: 25,
                               alignment: Alignment.centerRight,
@@ -154,7 +154,6 @@ class ProfilePageState extends State<ProfilePage> {
             ),
             AchievementsComponent(),
             Dashboard(),
-            
           ],
         ),
       ]),

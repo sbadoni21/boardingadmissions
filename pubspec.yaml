@@ -40,6 +40,8 @@ dependencies:
   firebase_database: ^10.2.7
   flutter_native_splash: ^2.3.3
   cloud_firestore: ^4.9.3
+  easy_search_bar: ^2.5.0
+  logger: ^2.0.2+1
 
 
 

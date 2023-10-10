@@ -5,10 +5,12 @@ class MyAppBar extends StatefulWidget {
   const MyAppBar({Key? key}) : super(key: key);
 
   @override
-  _MyAppBarState createState() => _MyAppBarState(); // Corrected the state class name
+  _MyAppBarState createState() =>
+      _MyAppBarState(); // Corrected the state class name
 }
 
-class _MyAppBarState extends State<MyAppBar> { // Corrected the state class name
+class _MyAppBarState extends State<MyAppBar> {
+  // Corrected the state class name
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -37,7 +39,7 @@ class _MyAppBarState extends State<MyAppBar> { // Corrected the state class name
             Container(
               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               child: Image.asset(
-                'logo.png',
+                'assets/logo.png',
                 height: 100,
                 width: 100,
               ),

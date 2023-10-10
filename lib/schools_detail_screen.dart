@@ -39,7 +39,7 @@ class _SchoolDetailPageState extends State<SchoolDetailPage> {
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Image.asset(
-                  'logo.png',
+                  'assets/logo.png',
                   height: 100,
                   width: 100,
                 ),
