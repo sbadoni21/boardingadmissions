@@ -1,4 +1,5 @@
-import 'package:boardingadmissions/login_page.dart';
+import 'package:boardingadmissions/views/login_page.dart';
+import 'package:boardingadmissions/services/signup_service.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -140,16 +141,19 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Your button click logic here
+                  signup_service().registerUser(
+      name: name, // Pass the name value
+      email: email,
+       selectedClass: selectedClass, // Pass the email value
+      password: password,
+      location: location // Pass the password value
+    );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Colors.blue, // Make the button background transparent
-                  foregroundColor: Colors.blue, // Set text color to blue
-                  // Add a blue border
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Rounded corners
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
                 child: Container(
@@ -158,7 +162,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Center(
                     child: Text(
                       'Sign up',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
                 ),

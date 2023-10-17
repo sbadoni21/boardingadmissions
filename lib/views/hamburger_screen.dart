@@ -1,4 +1,4 @@
-import 'package:boardingadmissions/home_page.dart';
+import 'package:boardingadmissions/views/home_page.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatefulWidget {

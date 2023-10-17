@@ -1,9 +1,11 @@
-import 'package:boardingadmissions/chat.dart';
+import 'package:boardingadmissions/views/chat.dart';
 import 'package:boardingadmissions/components/sample_classes.dart';
+import 'package:boardingadmissions/components/search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:boardingadmissions/components/appbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:boardingadmissions/profile_page.dart';
-import 'package:boardingadmissions/hamburger_screen.dart';
+import 'package:boardingadmissions/views/profile_page.dart';
+import 'package:boardingadmissions/views/hamburger_screen.dart';
 
 class FaqItem {
   final String question;
@@ -75,72 +77,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: 76,
-        elevation: 0,
-        flexibleSpace: Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.white.withOpacity(0.8),
-                Colors.white,
-              ],
-              stops: const [
-                0.0,
-                1,
-              ],
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Image.asset(
-                  'assets/logo.png',
-                  height: 100,
-                  width: 100,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.search,
-                          size: 30, color: Color.fromRGBO(2, 84, 152, 1)),
-                      onPressed: () => {
-                        Container(
-                          width: 100,
-                          height: 30,
-                          child: SearchBar(
-                            hintText: "search here" ,
-                          ),
-                        )
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.menu,
-                          size: 30, color: Color.fromRGBO(2, 84, 152, 1)),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MenuScreen()));
-                        // Handle notifications icon press
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: IndexedStack(
         index: _currentIndex,
         children: [
@@ -264,7 +201,8 @@ class HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 20),
           Container(
-            width: 60,
+            width: 184,
+            height: 40,
             padding: EdgeInsets.only(left: 100, right: 100),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -295,43 +233,6 @@ class HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 20),
           SampleClasses(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: buttonTitles.map((title) {
-                return ElevatedButton(
-                  onPressed: () {
-                    // Handle button press
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(240, 255, 255, 1),
-                    minimumSize: const Size(100, 100),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    shadowColor: Colors.black54,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        title.split('-')[0],
-                        style:
-                            const TextStyle(color: Colors.blue, fontSize: 16),
-                      ),
-                      Text(
-                        title.split('-')[1],
-                        style:
-                            const TextStyle(color: Colors.blue, fontSize: 12),
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
           const Padding(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 40),
             child: Divider(
@@ -561,4 +462,3 @@ class HomePageState extends State<HomePage> {
     );
   }
 }
-

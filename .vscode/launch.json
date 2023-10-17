@@ -10,6 +10,12 @@
             "type": "dart"
         },
         {
+            "name": "Flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+          },
+        {
             "name": "boardingadmissions (profile mode)",
             "request": "launch",
             "type": "dart",

@@ -1,16 +1,10 @@
-import 'package:boardingadmissions/hamburger_screen.dart';
+import 'package:boardingadmissions/components/search_bar.dart';
+import 'package:boardingadmissions/views/hamburger_screen.dart';
 import 'package:flutter/material.dart';
 
-class MyAppBar extends StatefulWidget {
-  const MyAppBar({Key? key}) : super(key: key);
-
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
-  _MyAppBarState createState() =>
-      _MyAppBarState(); // Corrected the state class name
-}
-
-class _MyAppBarState extends State<MyAppBar> {
-  // Corrected the state class name
+  Size get preferredSize => Size.fromHeight(76.0);
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -27,21 +21,19 @@ class _MyAppBarState extends State<MyAppBar> {
               Colors.white.withOpacity(0.8),
               Colors.white,
             ],
-            stops: const [
-              0.0,
-              1,
-            ],
+            stops: const [0.0, 1],
           ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
+              width: 150,
               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               child: Image.asset(
                 'assets/logo.png',
-                height: 100,
-                width: 100,
+                fit: BoxFit.fill,
               ),
             ),
             Container(
@@ -49,15 +41,25 @@ class _MyAppBarState extends State<MyAppBar> {
               child: Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.search,
-                        size: 30, color: Color.fromRGBO(2, 84, 152, 1)),
+                    icon: const Icon(
+                      Icons.search,
+                      size: 30,
+                      color: Color.fromRGBO(2, 84, 152, 1),
+                    ),
                     onPressed: () {
-                      // Handle search icon press
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SearchBarButton()));
+                      // Handle notifications icon press
                     },
                   ),
                   IconButton(
-                    icon: const Icon(Icons.menu,
-                        size: 30, color: Color.fromRGBO(2, 84, 152, 1)),
+                    icon: const Icon(
+                      Icons.menu,
+                      size: 30,
+                      color: Color.fromRGBO(2, 84, 152, 1),
+                    ),
                     onPressed: () {
                       Navigator.push(
                           context,

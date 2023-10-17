@@ -1,4 +1,4 @@
-import 'package:boardingadmissions/hamburger_screen.dart';
+import 'package:boardingadmissions/views/hamburger_screen.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatefulWidget {

@@ -1,13 +1,13 @@
-import 'package:boardingadmissions/chat.dart';
-import 'package:boardingadmissions/home_page.dart';
-import 'package:boardingadmissions/login_page.dart';
-import 'package:boardingadmissions/notification.dart';
-import 'package:boardingadmissions/profile_page.dart';
-import 'package:boardingadmissions/schools_detail_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:boardingadmissions/components/search_bar.dart';
-import 'package:logger/logger.dart';
+import 'package:boardingadmissions/components/side_menu_bar.dart';
+import 'package:boardingadmissions/views/hamburger_screen.dart';
+import 'package:boardingadmissions/views/home_page.dart';
+import 'package:boardingadmissions/views/login_page.dart';
 
+import 'package:boardingadmissions/views/signup_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'package:logger/logger.dart';
+import 'package:boardingadmissions/components/video_player.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -15,15 +15,26 @@ void main() async {
   final logger = Logger(
     printer: PrettyPrinter(),
   );
-  try{
-    await Firebase.initializeApp();
+  try {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: "AIzaSyAVWrB9v-jqhkurev2Bbqf8bRyskX1djWY",
+        appId: "1:231034076515:android:1c99224cdd38922cc56756",
+        messagingSenderId: "231034076515",
+        projectId: "boarding-admissions",
+      ),
+    );
     logger.i("connected");
-  }
-  catch(e){
+  } catch (e) {
     logger.e(e);
   }
   runApp(MyApp());
 }
+
+// void main() {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   runApp(MyApp())
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -31,7 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: VideoPlayerWithControls(),
     );
   }
 }
