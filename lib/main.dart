@@ -20,7 +20,7 @@ void main() async {
         appId: "1:231034076515:android:1c99224cdd38922cc56756",
         messagingSenderId: "231034076515",
         projectId: "boarding-admissions",
-        
+
       ),
     );
     logger.i("connected");
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FacultyInfo(),
+      home: FacultyInfo(),  
     );
   }
 }
