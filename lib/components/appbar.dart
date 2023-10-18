@@ -1,4 +1,4 @@
-import 'package:boardingadmissions/components/search_bar.dart';
+import 'package:boardingadmissions/views/search_page.dart';
 import 'package:boardingadmissions/views/hamburger_screen.dart';
 import 'package:flutter/material.dart';
 

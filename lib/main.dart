@@ -1,9 +1,7 @@
-import 'package:boardingadmissions/components/side_menu_bar.dart';
-import 'package:boardingadmissions/views/hamburger_screen.dart';
-import 'package:boardingadmissions/views/home_page.dart';
-import 'package:boardingadmissions/views/login_page.dart';
+import 'package:boardingadmissions/components/notes_Viewer.dart';
+import 'package:boardingadmissions/views/faculty_page.dart';
+import 'package:boardingadmissions/views/studymaterial_page.dart';
 
-import 'package:boardingadmissions/views/signup_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:logger/logger.dart';
@@ -42,7 +40,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: VideoPlayerWithControls(),
+      home: FacultyInfo(),
     );
   }
 }
