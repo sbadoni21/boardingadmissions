@@ -13,86 +13,88 @@ class FacultyInfo extends StatefulWidget {
 class _FacultyInfoState extends State<FacultyInfo> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Scaffold(
-        appBar: CustomAppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              SearchBarWithButton(hintText: "Search here..."),
-              SizedBox(
-                height: 12,
-              ),
-              Text(
-                "Staff Available for Student",
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 13, color: Colors.blueAccent),
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              ListTileWithPhoto(
-                imageUrl: 'assets/photos/image8.png',
-                onProfilePressed: () {
-                  // Handle profile button press
-                },
-                onCallPressed: () {
-                  // Handle call button press
-                },
-                onTextPressed: () {
-                  // Handle text button press
-                },
-              ),
-              ListTileWithPhoto(
-                imageUrl: 'assets/photos/image8.png',
-                onProfilePressed: () {
-                  // Handle profile button press
-                },
-                onCallPressed: () {
-                  // Handle call button press
-                },
-                onTextPressed: () {
-                  // Handle text button press
-                },
-              ),
-              ListTileWithPhoto(
-                imageUrl: 'assets/photos/image8.png',
-                onProfilePressed: () {
-                  // Handle profile button press
-                },
-                onCallPressed: () {
-                  // Handle call button press
-                },
-                onTextPressed: () {
-                  // Handle text button press
-                },
-              ),
-              ListTileWithPhoto(
-                imageUrl: 'assets/photos/image8.png',
-                onProfilePressed: () {
-                  // Handle profile button press
-                },
-                onCallPressed: () {
-                  // Handle call button press
-                },
-                onTextPressed: () {
-                  // Handle text button press
-                },
-              ),
-              ListTileWithPhoto(
-                imageUrl: 'assets/photos/image8.png',
-                onProfilePressed: () {
-                  // Handle profile button press
-                },
-                onCallPressed: () {
-                  // Handle call button press
-                },
-                onTextPressed: () {
-                  // Handle text button press
-                },
-              )
-            ],
+    return SafeArea(
+      child: Material(
+        child: Scaffold(
+          appBar: CustomAppBar(),
+          body: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                SearchBarWithButton(hintText: "Search here..."),
+                SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  "Staff Available for Student",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 13, color: Colors.blueAccent),
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                ListTileWithPhoto(
+                  imageUrl: 'assets/photos/image8.png',
+                  onProfilePressed: () {
+                    // Handle profile button press
+                  },
+                  onCallPressed: () {
+                    // Handle call button press
+                  },
+                  onTextPressed: () {
+                    // Handle text button press
+                  },
+                ),
+                ListTileWithPhoto(
+                  imageUrl: 'assets/photos/image8.png',
+                  onProfilePressed: () {
+                    // Handle profile button press
+                  },
+                  onCallPressed: () {
+                    // Handle call button press
+                  },
+                  onTextPressed: () {
+                    // Handle text button press
+                  },
+                ),
+                ListTileWithPhoto(
+                  imageUrl: 'assets/photos/image8.png',
+                  onProfilePressed: () {
+                    // Handle profile button press
+                  },
+                  onCallPressed: () {
+                    // Handle call button press
+                  },
+                  onTextPressed: () {
+                    // Handle text button press
+                  },
+                ),
+                ListTileWithPhoto(
+                  imageUrl: 'assets/photos/image8.png',
+                  onProfilePressed: () {
+                    // Handle profile button press
+                  },
+                  onCallPressed: () {
+                    // Handle call button press
+                  },
+                  onTextPressed: () {
+                    // Handle text button press
+                  },
+                ),
+                ListTileWithPhoto(
+                  imageUrl: 'assets/photos/image8.png',
+                  onProfilePressed: () {
+                    // Handle profile button press
+                  },
+                  onCallPressed: () {
+                    // Handle call button press
+                  },
+                  onTextPressed: () {
+                    // Handle text button press
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),

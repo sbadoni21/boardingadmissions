@@ -76,107 +76,109 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: [
-          buildHomePage(),
-          ProfilePage(),
-          buildNotificationScreen(),
-          Chat(), // Replace with your SettingsScreen
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 0;
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                  elevation: _currentIndex == 0 ? 4 : 0,
-                  shadowColor: Colors.black,
-                  backgroundColor: Colors.white // Elevation when selected
-                  ),
-              child: Icon(Icons.home),
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 1;
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                  elevation: _currentIndex == 1 ? 4 : 0,
-                  shadowColor: Colors.black,
-                  backgroundColor: Colors.white // Elevation when selected
-                  ),
-              child: Icon(Icons.person),
-            ),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 2;
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                  elevation: _currentIndex == 2 ? 4 : 0,
-                  shadowColor: Colors.black,
-                  backgroundColor: Colors.white // Elevation when selected
-                  ),
-              child: Icon(Icons.notifications),
-            ),
-            label: 'Notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 3;
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                elevation: _currentIndex == 3 ? 4 : 0,
-                shadowColor: Colors.black,
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-
-                // Elevation when selected
+    return SafeArea(
+      child: Scaffold(
+        appBar: CustomAppBar(),
+        body: IndexedStack(
+          index: _currentIndex,
+          children: [
+            buildHomePage(),
+            ProfilePage(),
+            buildNotificationScreen(),
+            Chat(), // Replace with your SettingsScreen
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.grey,
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 0;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                    elevation: _currentIndex == 0 ? 4 : 0,
+                    shadowColor: Colors.black,
+                    backgroundColor: Colors.white // Elevation when selected
+                    ),
+                child: Icon(Icons.home),
               ),
-              child: Column(children: [
-                Icon(
-                  Icons.chat_bubble_outline,
-                ),
-                Text(
-                  "chat",
-                  style: TextStyle(
-                      color: _currentIndex == 3 ? Colors.blue : Colors.white),
-                )
-              ]),
+              label: 'Home',
             ),
-            label: '',
-          ),
-        ],
+            BottomNavigationBarItem(
+              icon: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 1;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                    elevation: _currentIndex == 1 ? 4 : 0,
+                    shadowColor: Colors.black,
+                    backgroundColor: Colors.white // Elevation when selected
+                    ),
+                child: Icon(Icons.person),
+              ),
+              label: 'Profile',
+            ),
+            BottomNavigationBarItem(
+              icon: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 2;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                    elevation: _currentIndex == 2 ? 4 : 0,
+                    shadowColor: Colors.black,
+                    backgroundColor: Colors.white // Elevation when selected
+                    ),
+                child: Icon(Icons.notifications),
+              ),
+              label: 'Notifications',
+            ),
+            BottomNavigationBarItem(
+              icon: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 3;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  elevation: _currentIndex == 3 ? 4 : 0,
+                  shadowColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+    
+                  // Elevation when selected
+                ),
+                child: Column(children: [
+                  Icon(
+                    Icons.chat_bubble_outline,
+                  ),
+                  Text(
+                    "chat",
+                    style: TextStyle(
+                        color: _currentIndex == 3 ? Colors.blue : Colors.white),
+                  )
+                ]),
+              ),
+              label: '',
+            ),
+          ],
+        ),
       ),
     );
   }
