@@ -1,13 +1,13 @@
-import 'dart:html';
+// import 'dart:html';
 
-
-import 'package:boardingadmissions/services/sign_in_with_google.dart';
-import 'package:flutter/material.dart';
-import 'package:boardingadmissions/views/signup_page.dart';
-import 'package:boardingadmissions/views/home_page.dart';
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:boardingadmissions/services/authentication_service.dart';
+import 'package:boardingadmissions/services/sign_in_with_google.dart';
+import 'package:boardingadmissions/views/home_page.dart';
+import 'package:boardingadmissions/views/signup_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -45,211 +45,215 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Logo with position animation
-          AnimatedPositioned(
-            duration:
-                Duration(seconds: 1), // Duration for the position animation
-            curve: Curves.easeInOut, // Adjust the curve as needed
-            top: logoPosition,
-            child: Hero(
-              tag: 'logo',
-              child: Image.asset(
-                'assets/logo.png',
-                width: 200.0,
-                height: 200.0,
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Logo with position animation
+            AnimatedPositioned(
+              duration:
+                  Duration(seconds: 1), // Duration for the position animation
+              curve: Curves.easeInOut, // Adjust the curve as needed
+              top: logoPosition,
+              child: Hero(
+                tag: 'logo',
+                child: Image.asset(
+                  'assets/logo.png',
+                  width: 200.0,
+                  height: 200.0,
+                ),
               ),
             ),
-          ),
-          // Other login content with delayed appearance
-          AnimatedOpacity(
-            duration:
-                Duration(seconds: 1), // Duration for the fade-in animation
-            opacity: logoPosition == -10.0 ? 1.0 : 0.0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(30, 100, 30, 0),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10),
-                      TextField(
-                        controller: emailController,
-                        style: TextStyle(color: Colors.black),
-                        decoration: InputDecoration(hintText: 'Email'),
-                      ),
-                      SizedBox(height: 10),
-                      TextField(
-                        controller: passwordController,
-                        obscureText: !isPasswordVisible,
-                        style: TextStyle(color: Colors.black),
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              isPasswordVisible
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
+            // Other login content with delayed appearance
+            AnimatedOpacity(
+              duration:
+                  Duration(seconds: 1), // Duration for the fade-in animation
+              opacity: logoPosition == -10.0 ? 1.0 : 0.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(30, 100, 30, 0),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 10),
+                        TextField(
+                          controller: emailController,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(hintText: 'Email'),
+                        ),
+                        SizedBox(height: 10),
+                        TextField(
+                          controller: passwordController,
+                          obscureText: !isPasswordVisible,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                isPasswordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: togglePasswordVisibility,
                             ),
-                            onPressed: togglePasswordVisibility,
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            // Handle the "Forgot Password" action here.
+                            // You can navigate to the password reset page or perform any other action.
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.black87,
+                          ),
+                          child: Text('Forgot password'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 60),
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (emailController.text.isEmpty ||
+                          passwordController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content:
+                                Text("Please enter both email and password"),
+                          ),
+                        );
+                      } else {
+                        User? result = await AuthenticationServices().signIn(
+                          emailController.text,
+                          passwordController.text,
+                        );
+                        if (result != null) {
+                          // Sign-in successful
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                  "Sign-in failed. Please check your credentials and try again."),
+                            ),
+                          );
+                        }
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: Container(
+                      width: 200,
+                      height: 50,
+                      child: const Center(
+                        child: Text(
+                          'Login',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  const Text("or login using"),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 30,
+                    width: 30,
+                    child: Image.asset(
+                      'assets/googlelogo.png',
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  ElevatedButton(
+                      onPressed: signInWithGoogle,
+                      child: const Text(
+                        "Google",
+                      )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
                         onPressed: () {
                           // Handle the "Forgot Password" action here.
                           // You can navigate to the password reset page or perform any other action.
                         },
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.black87,
+                        style: TextButton.styleFrom(),
+                        child: const Text(
+                          'New to boarding admissions?',
+                          style: TextStyle(fontSize: 12, color: Colors.black87),
                         ),
-                        child: Text('Forgot password'),
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(height: 60),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (emailController.text.isEmpty ||
-                        passwordController.text.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Please enter both email and password"),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUpPage(),
                         ),
                       );
-                    } else {
-                      User? result = await AuthenticationServices().signIn(
-                        emailController.text,
-                        passwordController.text,
-                      );
-                      if (result != null) {
-                        // Sign-in successful
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
-                          ),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                                "Sign-in failed. Please check your credentials and try again."),
-                          ),
-                        );
-                      }
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      // Your button click logic here
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      onPrimary: Colors.blue,
+                      side: const BorderSide(color: Colors.blue, width: 2),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
                     ),
-                  ),
-                  child: Container(
-                    width: 200,
-                    height: 50,
-                    child: const Center(
-                      child: Text(
-                        'Login',
-                        style: TextStyle(fontSize: 18),
+                    child: Container(
+                      width: 180,
+                      height: 50,
+                      child: const Center(
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                const Text("or login using"),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: 30,
-                  width: 30,
-                  child: Image.asset(
-                    'assets/googlelogo.png',
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-                const SizedBox(
-                  height: 3,
-                ),
-                ElevatedButton(
-                    onPressed: signInWithGoogle,
-                    child: const Text(
-                      "Google",
-                    )),
-                const SizedBox(
-                  height: 20,
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        // Handle the "Forgot Password" action here.
-                        // You can navigate to the password reset page or perform any other action.
-                      },
-                      style: TextButton.styleFrom(),
-                      child: const Text(
-                        'New to boarding admissions?',
-                        style: TextStyle(fontSize: 12, color: Colors.black87),
-                      ),
-                    ),
-                  ],
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SignUpPage(),
-                      ),
-                    );
-                    // Your button click logic here
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    onPrimary: Colors.blue,
-                    side: const BorderSide(color: Colors.blue, width: 2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                  ),
-                  child: Container(
-                    width: 180,
-                    height: 50,
-                    child: const Center(
-                      child: Text(
-                        'Sign up',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

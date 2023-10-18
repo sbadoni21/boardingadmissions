@@ -1,6 +1,6 @@
 import 'package:boardingadmissions/views/chat.dart';
 import 'package:boardingadmissions/components/sample_classes.dart';
-import 'package:boardingadmissions/components/search_bar.dart';
+import 'package:boardingadmissions/views/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:boardingadmissions/components/appbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
