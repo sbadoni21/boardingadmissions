@@ -1,5 +1,7 @@
 import 'package:boardingadmissions/components/notes_Viewer.dart';
 import 'package:boardingadmissions/views/faculty_page.dart';
+import 'package:boardingadmissions/views/login_page.dart';
+import 'package:boardingadmissions/views/splash_screen.dart';
 import 'package:boardingadmissions/views/studymaterial_page.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +22,6 @@ void main() async {
         appId: "1:231034076515:android:1c99224cdd38922cc56756",
         messagingSenderId: "231034076515",
         projectId: "boarding-admissions",
-
       ),
     );
     logger.i("connected");
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FacultyInfo(),  
+      home: LoginPage(),
     );
   }
 }

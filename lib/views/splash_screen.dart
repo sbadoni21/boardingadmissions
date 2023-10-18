@@ -48,39 +48,41 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-            child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Logo with opacity animation
-            AnimatedOpacity(
-              duration:
-                  Duration(seconds: 2), // Duration for the fade-in animation
-              opacity: opacityLevel,
-              child: Image.asset(
-                'assets/logo.png',
-                width: 200.0,
-                height: 200.0,
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Center(
+              child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Logo with opacity animation
+              AnimatedOpacity(
+                duration:
+                    Duration(seconds: 2), // Duration for the fade-in animation
+                opacity: opacityLevel,
+                child: Image.asset(
+                  'assets/logo.png',
+                  width: 200.0,
+                  height: 200.0,
+                ),
               ),
-            ),
-
-            // Login content with position animation
-            AnimatedPositioned(
-              duration: Duration(seconds: 2), // Duration for position animation
-              curve: Curves.easeInOut, // Adjust the curve as needed
-              top: logoPosition,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Add your login content here
-                  // For example, you can add TextFields, buttons, or any other widgets
-                  // that you want to display as part of the login screen.
-                ],
+    
+              // Login content with position animation
+              AnimatedPositioned(
+                duration: Duration(seconds: 2), // Duration for position animation
+                curve: Curves.easeInOut, // Adjust the curve as needed
+                top: logoPosition,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Add your login content here
+                    // For example, you can add TextFields, buttons, or any other widgets
+                    // that you want to display as part of the login screen.
+                  ],
+                ),
               ),
-            ),
-          ],
-        )));
+            ],
+          ))),
+    );
   }
 }

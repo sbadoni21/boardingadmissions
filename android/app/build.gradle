@@ -72,3 +72,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
 
 }
+android {
+    ndkVersion "25.1.8937393"
+}
