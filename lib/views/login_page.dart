@@ -167,9 +167,9 @@ class LoginPageState extends State<LoginPage> {
                           width: 200,
                           height: 50,
                           child: const Center(
-                            child: Text(
-                              'Login',
-                              style: TextStyle(fontSize: 18),
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text("Forgot Password?"),
                             ),
                           ),
                         ),
@@ -193,7 +193,9 @@ class LoginPageState extends State<LoginPage> {
                         height: 3,
                       ),
                       ElevatedButton(
-                          onPressed: signInWithGoogle,
+                          onPressed: () async {
+                            await signInWithGoogle();
+                          },
                           child: const Text(
                             "Google",
                           )),
