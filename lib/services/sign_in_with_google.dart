@@ -1,12 +1,9 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-Future<UserCredential?> signInWithGoogle() async {
+Future<User?> signInWithGoogle() async {
   try {
-    // Initialize GoogleSignIn with the client ID
-    final GoogleSignIn googleSignIn = GoogleSignIn(
-      clientId: 'YOUR_CLIENT_ID', // Replace with your actual client ID
-    );
+     final GoogleSignIn googleSignIn = GoogleSignIn();
 
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
@@ -31,7 +28,7 @@ Future<UserCredential?> signInWithGoogle() async {
     final UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
     print('Google Sign-In Success');
-    return userCredential;
+    return userCredential.user;
   } catch (error) {
     print('Google Sign-In Error: $error');
     return null; // Return null or handle the error as needed

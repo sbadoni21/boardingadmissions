@@ -193,7 +193,9 @@ class LoginPageState extends State<LoginPage> {
                         height: 3,
                       ),
                       ElevatedButton(
-                          onPressed: signInWithGoogle,
+                          onPressed: () async {
+                            await signInWithGoogle();
+                          },
                           child: const Text(
                             "Google",
                           )),
