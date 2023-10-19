@@ -13,8 +13,8 @@ class SampleClasses extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-      height: 140, // Set the height of the story cards
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+      height: 160, // Set the height of the story cards
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
@@ -26,8 +26,8 @@ class SampleClasses extends StatelessWidget {
 
   Widget buildStoryCard(String title) {
     return Container(
-      width: 90, // Set the width of each story card
-      margin: EdgeInsets.all(12.0),
+      width: 120, // Set the width of each story card
+      margin: EdgeInsets.fromLTRB(20, 12, 20, 12),
       decoration: BoxDecoration(
         color: Colors.blue,
         borderRadius: BorderRadius.circular(10.0),
@@ -41,4 +41,3 @@ class SampleClasses extends StatelessWidget {
     );
   }
 }
-

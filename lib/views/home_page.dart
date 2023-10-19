@@ -1,3 +1,5 @@
+import 'package:boardingadmissions/components/bottom_navbar.dart';
+import 'package:boardingadmissions/components/dreamschool_component.dart';
 import 'package:boardingadmissions/views/chat.dart';
 import 'package:boardingadmissions/components/sample_classes.dart';
 import 'package:boardingadmissions/views/search_page.dart';
@@ -26,12 +28,18 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  
+
   final PageController _pageController = PageController(initialPage: 0);
   @override
   void dispose() {
     _pageController.dispose(); // Dispose the PageController
     super.dispose();
+  }
+
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
   final List<String> imageUrls = [
@@ -49,6 +57,8 @@ class HomePageState extends State<HomePage> {
   final List<Map<String, String>> dreamSchools = [
     {"schoolName": "School 1", "imageUrl": "assets/school2.png"},
     {"schoolName": "School 2", "imageUrl": "assets/school4.png"},
+    {"schoolName": "School 3", "imageUrl": "assets/school5.png"},
+    {"schoolName": "School 4", "imageUrl": "assets/school6.png"},
     {"schoolName": "School 3", "imageUrl": "assets/school5.png"},
     {"schoolName": "School 4", "imageUrl": "assets/school6.png"},
   ];
@@ -80,106 +90,11 @@ class HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(),
-        body: IndexedStack(
-          index: _currentIndex,
-          children: [
-            buildHomePage(),
-            ProfilePage(),
-            buildNotificationScreen(),
-            Chat(), // Replace with your SettingsScreen
-          ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.grey,
+        bottomNavigationBar: BottomNavigation(
           currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _currentIndex = 0;
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                    elevation: _currentIndex == 0 ? 4 : 0,
-                    shadowColor: Colors.black,
-                    backgroundColor: Colors.white // Elevation when selected
-                    ),
-                child: Icon(Icons.home),
-              ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _currentIndex = 1;
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                    elevation: _currentIndex == 1 ? 4 : 0,
-                    shadowColor: Colors.black,
-                    backgroundColor: Colors.white // Elevation when selected
-                    ),
-                child: Icon(Icons.person),
-              ),
-              label: 'Profile',
-            ),
-            BottomNavigationBarItem(
-              icon: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _currentIndex = 2;
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                    elevation: _currentIndex == 2 ? 4 : 0,
-                    shadowColor: Colors.black,
-                    backgroundColor: Colors.white // Elevation when selected
-                    ),
-                child: Icon(Icons.notifications),
-              ),
-              label: 'Notifications',
-            ),
-            BottomNavigationBarItem(
-              icon: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _currentIndex = 3;
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  elevation: _currentIndex == 3 ? 4 : 0,
-                  shadowColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-    
-                  // Elevation when selected
-                ),
-                child: Column(children: [
-                  Icon(
-                    Icons.chat_bubble_outline,
-                  ),
-                  Text(
-                    "chat",
-                    style: TextStyle(
-                        color: _currentIndex == 3 ? Colors.blue : Colors.white),
-                  )
-                ]),
-              ),
-              label: '',
-            ),
-          ],
+          onTabTapped: _onTabTapped,
         ),
+        body: buildHomePage(),
       ),
     );
   }
@@ -256,61 +171,7 @@ class HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: imageSchools.map((school) {
-              final String? schoolName = school["schoolName"];
-              final String? imageUrl = school["imageUrl"];
-              if (schoolName != null && imageUrl != null) {
-                return ElevatedButton(
-                  onPressed: () {
-                    // Handle button press
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(240, 255, 255, 1),
-                    minimumSize: const Size(100, 100),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    shadowColor: Colors.black54,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: Image.asset(
-                          imageUrl,
-                          height: 100,
-                          width: 100,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              schoolName,
-                              style: const TextStyle(
-                                color: Colors.blue,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              } else {
-                return Container();
-              }
-            }).toList(),
-          ),
+          SampleClasses(),
           const SizedBox(height: 30),
           const Padding(
             padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -389,58 +250,7 @@ class HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: dreamSchools.map((school) {
-              final String? schoolName = school["schoolName"];
-              final String? imageUrl = school["imageUrl"];
-              if (schoolName != null && imageUrl != null) {
-                return Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // Handle button press
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
-                        minimumSize: const Size(100, 100),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(120.0),
-                        ),
-                        shadowColor: Colors.black87,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
-                            child: Image.asset(
-                              imageUrl,
-                              height: 60,
-                              width: 60,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      schoolName,
-                      style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w600),
-                    )
-                  ],
-                );
-              } else {
-                return Container();
-              }
-            }).toList(),
-          ),
+          SchoolList(schools: dreamSchools),
           const SizedBox(
             height: 10,
           ),
