@@ -29,26 +29,25 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animated_menu: ^1.0.2
-
   carousel_slider: ^4.0.0
   cloud_firestore: ^4.9.3
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.3
   easy_search_bar: ^2.5.0
+  email_validator: ^2.1.17
   firebase_auth: ^4.10.1
   firebase_core: ^2.17.0
   firebase_database: ^10.2.7
   flutter_native_splash: ^2.3.3
-  # flutter_volume_controller: ^1.2.7
   fluttertoast: ^8.2.2
   google_sign_in: ^6.1.5
+  just_audio: ^0.9.35
   logger: ^2.0.2+1
+  random_string: ^2.1.0
   rive: ^0.11.17
-  random_string: ^2.3.1
+  strings: ^2.0.3
   syncfusion_flutter_pdfviewer: ^23.1.41
   video_player: ^2.7.2
-  
-  just_audio: ^0.9.35
 
 dev_dependencies:
   flutter_lints: ^2.0.0

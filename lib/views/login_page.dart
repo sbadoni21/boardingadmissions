@@ -1,4 +1,5 @@
 import 'package:boardingadmissions/services/sign_in_with_google.dart';
+import 'package:boardingadmissions/views/password_reset_page.dart';
 import 'package:flutter/material.dart';
 import 'package:boardingadmissions/views/signup_page.dart';
 import 'package:boardingadmissions/views/home_page.dart';
@@ -112,8 +113,12 @@ class LoginPageState extends State<LoginPage> {
                           children: [
                             TextButton(
                               onPressed: () {
-                                // Handle the "Forgot Password" action here.
-                                // You can navigate to the password reset page or perform any other action.
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ResetPasswordPage(),
+                                  ),
+                                );
                               },
                               style: TextButton.styleFrom(
                                 foregroundColor: Colors.black87,
@@ -167,9 +172,9 @@ class LoginPageState extends State<LoginPage> {
                           width: 200,
                           height: 50,
                           child: const Center(
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text("Forgot Password?"),
+                            child: Text(
+                              "Sign In",
+                              style: TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
