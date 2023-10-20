@@ -1,11 +1,11 @@
-import 'package:boardingadmissions/services/sign_in_with_google.dart';
-import 'package:boardingadmissions/views/password_reset_page.dart';
-import 'package:flutter/material.dart';
-import 'package:boardingadmissions/views/signup_page.dart';
-import 'package:boardingadmissions/views/home_page.dart';
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:boardingadmissions/services/authentication_service.dart';
+import 'package:boardingadmissions/views/home_page.dart';
+import 'package:boardingadmissions/views/password_reset_page.dart';
+import 'package:boardingadmissions/views/signup_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -147,12 +147,11 @@ class LoginPageState extends State<LoginPage> {
                             );
                             if (result != null) {
                               // Sign-in successful
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePage(),
-                                ),
-                              );
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()),
+                                  (route) => false);
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -199,7 +198,7 @@ class LoginPageState extends State<LoginPage> {
                       ),
                       ElevatedButton(
                           onPressed: () async {
-                            await signInWithGoogle();
+                            await AuthenticationServices().signInWithGoogle();
                           },
                           child: const Text(
                             "Google",

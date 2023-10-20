@@ -1,5 +1,6 @@
 import 'package:animated_menu/animated_menu.dart';
-import 'package:boardingadmissions/views/hamburger_screen.dart';
+import 'package:boardingadmissions/components/side_menu_bar.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

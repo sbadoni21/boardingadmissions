@@ -1,5 +1,6 @@
-import 'package:boardingadmissions/views/login_page.dart';
 import 'package:boardingadmissions/services/signup_service.dart';
+import 'package:boardingadmissions/views/home_page.dart';
+import 'package:boardingadmissions/views/login_page.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -142,14 +143,20 @@ class _SignUpPageState extends State<SignUpPage> {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    signup_service().registerUser(
+                  onPressed: () async {
+                    await signup_service().registerUser(
                         name: name, // Pass the name value
                         email: email,
                         selectedClass: selectedClass, // Pass the email value
                         password: password,
                         location: location // Pass the password value
                         );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,

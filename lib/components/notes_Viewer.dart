@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-class PDFViewerScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('PDF Viewer'),
-        ),
-        body: Container(
-            width: 500,
-            height: 500,
-            child: SfPdfViewer.asset("files/DECLARATION.pdf")));
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
+
+class PDFViewerScreen {
+  static Future<File> loadNetwork(String url) async {
+    final response = await http
+        .get(Uri.parse(url)); // Use Uri.parse() to convert the URL to a Uri.
+    final bytes = response.bodyBytes;
+    return _storeFile(url, bytes);
+  }
+
+  static Future<File> _storeFile(String url, List<int> bytes) async {
+    // Add 'async' to the function.
+    final filename = basename(url);
+    final dir = await getApplicationDocumentsDirectory();
+
+    final file = File('${dir.path}/$filename');
+    await file.writeAsBytes(bytes,
+        flush: true); // Pass 'bytes' to writeAsBytes.
+    return file;
   }
 }

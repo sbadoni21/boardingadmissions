@@ -1,4 +1,3 @@
-import 'package:boardingadmissions/components/bottom_navbar.dart';
 import 'package:boardingadmissions/components/dreamschool_component.dart';
 import 'package:boardingadmissions/views/chat.dart';
 import 'package:boardingadmissions/components/sample_classes.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:boardingadmissions/components/appbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:boardingadmissions/views/profile_page.dart';
-import 'package:boardingadmissions/views/hamburger_screen.dart';
 
 class FaqItem {
   final String question;
@@ -34,12 +32,6 @@ class HomePageState extends State<HomePage> {
   void dispose() {
     _pageController.dispose(); // Dispose the PageController
     super.dispose();
-  }
-
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
   }
 
   final List<String> imageUrls = [
@@ -90,11 +82,141 @@ class HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(),
-        bottomNavigationBar: BottomNavigation(
-          currentIndex: _currentIndex,
-          onTabTapped: _onTabTapped,
+        body: IndexedStack(
+          index: _currentIndex,
+          children: [
+            buildHomePage(),
+            ProfilePage(),
+            buildNotificationScreen(),
+            Chat(), // Replace with your SettingsScreen
+          ],
         ),
-        body: buildHomePage(),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.grey,
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon:  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _currentIndex = 0;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                        elevation: _currentIndex == 0 ? 4 : 0,
+                        shadowColor: Colors.black,
+                        backgroundColor: Colors.white,shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ), // Elevation when selected
+                        ),
+                    child: Column(
+                      children: [
+                        Icon(Icons.home,
+                            color:
+                                _currentIndex == 0 ? Colors.blue : Colors.grey),
+                        Text("Home",
+                            style: TextStyle(
+                                color: _currentIndex == 0
+                                    ? Colors.blue
+                                    : Colors.grey))
+                      ],
+                    ),
+                  ),
+                
+                label: ""),
+            BottomNavigationBarItem(
+              icon: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 1;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                    elevation: _currentIndex == 1 ? 4 : 0,
+                    shadowColor: Colors.black,
+                    backgroundColor: Colors.white,shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ), // Elevation when selected
+                    ),
+                child: Column(
+                  children: [
+                    Icon(Icons.person,
+                        color: _currentIndex == 1 ? Colors.blue : Colors.grey),
+                    Text("Profile",
+                        style: TextStyle(
+                            color:
+                                _currentIndex == 1 ? Colors.blue : Colors.grey))
+                  ],
+                ),
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 2;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                    elevation: _currentIndex == 2 ? 4 : 0,
+                    shadowColor: Colors.black,
+                    backgroundColor: Colors.white,shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ), // Elevation when selected
+                    ),
+                    
+                child: Column(
+                  children: [
+                    Icon(Icons.notifications,
+                        color: _currentIndex == 2 ? Colors.blue : Colors.grey),
+                    Text("Notifications",
+                        style: TextStyle(
+                            color:
+                                _currentIndex == 2 ? Colors.blue : Colors.grey))
+                  ],
+                ),
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 3;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  elevation: _currentIndex == 3 ? 4 : 0,
+                  shadowColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+
+                  // Elevation when selected
+                ),
+                child: Column(children: [
+                  Icon(Icons.chat_bubble_outline,
+                      color: _currentIndex == 3 ? Colors.blue : Colors.grey),
+                  Text(
+                    "chat",
+                    style: TextStyle(
+                        color: _currentIndex == 3 ? Colors.blue : Colors.grey),
+                  )
+                ]),
+              ),
+              label: '',
+            ),
+          ],
+        ),
       ),
     );
   }

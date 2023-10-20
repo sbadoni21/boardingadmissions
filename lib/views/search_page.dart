@@ -1,5 +1,6 @@
 import 'package:boardingadmissions/components/search_bar.dart';
-import 'package:boardingadmissions/views/hamburger_screen.dart';
+import 'package:boardingadmissions/components/side_menu_bar.dart';
+
 import 'package:flutter/material.dart';
 
 class SearchBarButton extends StatefulWidget {
@@ -98,8 +99,7 @@ class _SearchBarButtonState extends State<SearchBarButton> {
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: Column(
                 children: [
-                 SearchBarWithButton(hintText: "Search boarding admissions"),
-    
+                  SearchBarWithButton(hintText: "Search boarding admissions"),
                   SizedBox(height: 20),
                   Column(
                     children: searchOptions.map((option) {

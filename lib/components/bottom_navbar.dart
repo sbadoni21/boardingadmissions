@@ -36,6 +36,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
       icon: ElevatedButton(
         onPressed: () {
           widget.onTabTapped(index);
+
+          
         },
         style: ElevatedButton.styleFrom(
           elevation: widget.currentIndex == index ? 4 : 0,

@@ -1,3 +1,4 @@
+import 'package:boardingadmissions/components/appbar.dart';
 import 'package:flutter/material.dart' hide VoidCallback;
 import 'package:flutter/widgets.dart' show VoidCallback;
 
@@ -30,6 +31,7 @@ class ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CustomAppBar(),
         body: ListView(
           children: [
             Column(
@@ -159,7 +161,8 @@ class ChatState extends State<Chat> {
                         ),
                         onPressed: () {
                           setState(() {
-                            selectedQueryIndex = 0; // Set selectedQueryIndex to 0
+                            selectedQueryIndex =
+                                0; // Set selectedQueryIndex to 0
                           });
                         },
                         child: const Text(
@@ -179,7 +182,8 @@ class ChatState extends State<Chat> {
                         ),
                         onPressed: () {
                           setState(() {
-                            selectedQueryIndex = 1; // Set selectedQueryIndex to 1
+                            selectedQueryIndex =
+                                1; // Set selectedQueryIndex to 1
                           });
                         },
                         child: const Text(

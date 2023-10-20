@@ -1,17 +1,11 @@
-import 'package:boardingadmissions/components/notes_Viewer.dart';
-import 'package:boardingadmissions/views/faculty_page.dart';
+import 'package:boardingadmissions/services/authentication_service.dart';
 import 'package:boardingadmissions/views/home_page.dart';
 import 'package:boardingadmissions/views/login_page.dart';
-import 'package:boardingadmissions/views/splash_screen.dart';
-import 'package:boardingadmissions/views/studymaterial_page.dart';
-
 import 'package:firebase_core/firebase_core.dart';
-
-import 'package:logger/logger.dart';
-import 'package:boardingadmissions/components/video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final logger = Logger(
     printer: PrettyPrinter(),
@@ -26,16 +20,11 @@ void main() async {
       ),
     );
     logger.i("connected");
+    runApp(const MyApp());
   } catch (e) {
     logger.e(e);
   }
-  runApp(MyApp());
 }
-
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   runApp(MyApp())
-// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -43,7 +32,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: StreamBuilder(
+        stream: AuthenticationServices().firebaseAuth.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return HomePage();
+          }
+          return LoginPage();
+        },
+      ),
     );
   }
 }

@@ -1,3 +1,6 @@
+import 'package:boardingadmissions/components/appbar.dart';
+import 'package:boardingadmissions/components/notes_cards.dart';
+import 'package:boardingadmissions/views/studymaterial_page.dart';
 import 'package:flutter/material.dart';
 import 'package:boardingadmissions/components/dashboard.dart';
 import 'package:boardingadmissions/components/achivementsComponent.dart';
@@ -14,6 +17,7 @@ class ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CustomAppBar(),
         body: ListView(children: [
           Column(
             children: [
@@ -104,7 +108,13 @@ class ProfilePageState extends State<ProfilePage> {
                           Column(
                             children: [
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              StudyMaterial()));
+                                },
                                 icon: const Icon(Icons.note_add_outlined),
                                 color: Colors.blue,
                                 iconSize: 25,

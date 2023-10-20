@@ -1,6 +1,6 @@
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart'; // Import the email_validator package
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:random_string/random_string.dart';
 
 class AuthenticationServices {
@@ -9,7 +9,8 @@ class AuthenticationServices {
   // Sign in with email and password
   Future<User?> signIn(String email, String password) async {
     try {
-      UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(
+      UserCredential userCredential =
+          await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -47,18 +48,38 @@ class AuthenticationServices {
   }
 
   // Reset the password for the user
-  Future<bool> resetPassword(String email, String newPassword) async {
+  Future<bool> resetPassword(String email) async {
     try {
       await firebaseAuth.sendPasswordResetEmail(email: email);
-      // The user will receive an email with a link to reset their password
-
-      // You can also implement password change logic here if required
-      // Example: firebaseAuth.confirmPasswordReset(code: email, newPassword: newPassword);
 
       return true;
     } catch (e) {
       print('Failed to reset password: $e');
       return false;
     }
+  }
+
+  Future<User?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        UserCredential userCredential =
+            await firebaseAuth.signInWithCredential(credential);
+        return userCredential.user;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future signOut() async {
+    await GoogleSignIn().signOut();
+    await firebaseAuth.signOut();
   }
 }
