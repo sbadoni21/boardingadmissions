@@ -1,9 +1,7 @@
 import 'package:boardingadmissions/components/appbar.dart';
-import 'package:boardingadmissions/models/rive_assets.dart';
 import 'package:boardingadmissions/models/sidemenu_assets.dart';
+import 'package:boardingadmissions/services/authentication_service.dart';
 import 'package:boardingadmissions/views/home_page.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -55,7 +53,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               color: Colors.blue,
                             ),
                             child: Center(
-                              child: Image.asset("photos/image8.png"),
+                              child: Image.asset("assets/photos/image8.png"),
                             ),
                           ),
                         ),
@@ -151,6 +149,16 @@ class _MenuScreenState extends State<MenuScreen> {
                           },
                           icon: Icon(Icons.arrow_back_sharp),
                           label: Text("Back to Home")),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(45, 20, 45, 20),
+                      child: TextButton.icon(
+                          onPressed: () async {
+                            print(context.widget);
+                            await AuthenticationServices().signOut();
+                          },
+                          icon: Icon(Icons.logout),
+                          label: Text("Logout")),
                     ),
                   ],
                 )

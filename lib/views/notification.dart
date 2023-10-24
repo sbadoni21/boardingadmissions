@@ -1,5 +1,5 @@
 
-import 'package:boardingadmissions/components/side_menu_bar.dart';
+import 'package:boardingadmissions/views/side_menu_bar.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatefulWidget {

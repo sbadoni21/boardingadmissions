@@ -3,6 +3,9 @@ import 'package:boardingadmissions/views/home_page.dart';
 import 'package:boardingadmissions/views/login_page.dart';
 import 'package:flutter/material.dart';
 
+
+
+
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -24,6 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
     'SDFSV',
     'DFSDFSVSDV',
   ];
+  
 
   @override
   Widget build(BuildContext context) {

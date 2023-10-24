@@ -1,11 +1,10 @@
-import 'package:boardingadmissions/components/dreamschool_component.dart';
-import 'package:boardingadmissions/views/chat.dart';
-import 'package:boardingadmissions/components/sample_classes.dart';
-import 'package:boardingadmissions/views/search_page.dart';
-import 'package:flutter/material.dart';
 import 'package:boardingadmissions/components/appbar.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:boardingadmissions/components/dreamschool_component.dart';
+import 'package:boardingadmissions/components/sample_classes.dart';
+import 'package:boardingadmissions/views/chat.dart';
 import 'package:boardingadmissions/views/profile_page.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 
 class FaqItem {
   final String question;
@@ -103,33 +102,33 @@ class HomePageState extends State<HomePage> {
           },
           items: [
             BottomNavigationBarItem(
-                icon:  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _currentIndex = 0;
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                        elevation: _currentIndex == 0 ? 4 : 0,
-                        shadowColor: Colors.black,
-                        backgroundColor: Colors.white,shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ), // Elevation when selected
-                        ),
-                    child: Column(
-                      children: [
-                        Icon(Icons.home,
-                            color:
-                                _currentIndex == 0 ? Colors.blue : Colors.grey),
-                        Text("Home",
-                            style: TextStyle(
-                                color: _currentIndex == 0
-                                    ? Colors.blue
-                                    : Colors.grey))
-                      ],
-                    ),
+                icon: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _currentIndex = 0;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: _currentIndex == 0 ? 4 : 0,
+                    shadowColor: Colors.black,
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ), // Elevation when selected
                   ),
-                
+                  child: Column(
+                    children: [
+                      Icon(Icons.home,
+                          color:
+                              _currentIndex == 0 ? Colors.blue : Colors.grey),
+                      Text("Home",
+                          style: TextStyle(
+                              color: _currentIndex == 0
+                                  ? Colors.blue
+                                  : Colors.grey))
+                    ],
+                  ),
+                ),
                 label: ""),
             BottomNavigationBarItem(
               icon: ElevatedButton(
@@ -139,12 +138,13 @@ class HomePageState extends State<HomePage> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                    elevation: _currentIndex == 1 ? 4 : 0,
-                    shadowColor: Colors.black,
-                    backgroundColor: Colors.white,shape: RoundedRectangleBorder(
+                  elevation: _currentIndex == 1 ? 4 : 0,
+                  shadowColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ), // Elevation when selected
-                    ),
+                ),
                 child: Column(
                   children: [
                     Icon(Icons.person,
@@ -166,13 +166,13 @@ class HomePageState extends State<HomePage> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                    elevation: _currentIndex == 2 ? 4 : 0,
-                    shadowColor: Colors.black,
-                    backgroundColor: Colors.white,shape: RoundedRectangleBorder(
+                  elevation: _currentIndex == 2 ? 4 : 0,
+                  shadowColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ), // Elevation when selected
-                    ),
-                    
+                ),
                 child: Column(
                   children: [
                     Icon(Icons.notifications,

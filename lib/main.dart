@@ -4,6 +4,7 @@ import 'package:boardingadmissions/views/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:boardingadmissions/components/video_player.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,15 +33,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: StreamBuilder(
-        stream: AuthenticationServices().firebaseAuth.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return HomePage();
-          }
-          return LoginPage();
-        },
-      ),
+      home: VideoPlayerScreen(),
+      // home: StreamBuilder(
+      //   stream: AuthenticationServices().firebaseAuth.authStateChanges(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.hasData) {
+      //       return HomePage();
+      //     }
+      //     return LoginPage();
+      //   },
+      // ),
     );
   }
 }
