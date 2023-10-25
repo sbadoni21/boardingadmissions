@@ -1,12 +1,14 @@
+import 'package:boardingadmissions/components/video_player.dart';
 import 'package:flutter/material.dart';
 
+
 class SampleClasses extends StatelessWidget {
-  final List<String> buttonTitles = [
-    "Story 1",
-    "Story 2",
-    "Story 3",
-    "Story 4",
-    "Story 5",
+  final List<Map<String, dynamic>> buttonTitles = [
+    {"title": "Story 1", "videoPlayer": VideoPlayerScreen()},
+    {"title": "Story 2", "videoPlayer": VideoPlayerScreen()},
+    {"title": "Story 3", "videoPlayer": VideoPlayerScreen()},
+    {"title": "Story 4", "videoPlayer": VideoPlayerScreen()},
+    {"title": "Story 5", "videoPlayer": VideoPlayerScreen()},
   ];
 
   @override
@@ -17,14 +19,14 @@ class SampleClasses extends StatelessWidget {
       height: 160, // Set the height of the story cards
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          for (String title in buttonTitles) buildStoryCard(title),
-        ],
+        children: buttonTitles
+            .map((item) => buildStoryCard(context, item['title'], item['videoPlayer']))
+            .toList(),
       ),
     );
   }
 
-  Widget buildStoryCard(String title) {
+  Widget buildStoryCard(BuildContext context, String title, Widget route) {
     return Container(
       width: 120, // Set the width of each story card
       margin: EdgeInsets.fromLTRB(20, 12, 20, 12),
@@ -32,10 +34,19 @@ class SampleClasses extends StatelessWidget {
         color: Colors.blue,
         borderRadius: BorderRadius.circular(10.0),
       ),
-      child: Center(
-        child: Text(
-          title,
-          style: TextStyle(color: Colors.white, fontSize: 16),
+      child: ElevatedButton(
+        onPressed: () {
+          // Handle button click, e.g., navigate to the video player screen.
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => route),
+          );
+        },
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
         ),
       ),
     );

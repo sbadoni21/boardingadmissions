@@ -1,3 +1,6 @@
+
+import 'package:boardingadmissions/components/notes_Viewer.dart';
+import 'package:boardingadmissions/views/pdfView_page.dart';
 import 'package:flutter/material.dart';
 
 class NotesCards extends StatelessWidget {
@@ -28,30 +31,62 @@ class NoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150, // Adjust the width of each item
+       width: 150, // Adjust the width of each item
       margin: EdgeInsets.symmetric(horizontal: 10), // Add spacing
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.elliptical(10, 10)),
         child: Card(
-          elevation: 5,
-          shadowColor: Colors.black26,
-          borderOnForeground: true,
-          child: Column(
-            children: [
-              Image.asset('photos/image8.png'),
-              Text(
-                'Maths',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    color: Colors.black,
-                    overflow: TextOverflow.fade,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w800),
+            elevation: 5,
+            shadowColor: Colors.black26,
+            borderOnForeground: true,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors
+                    .transparent, // Set the button's background color to transparent
+                // Adjust the padding as needed
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                      10), // Adjust the border radius as needed
+                ),
               ),
-              Text("extra data"),
-            ],
-          ),
-        ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PDFViewerPage()));
+              },
+              child: Container(
+                constraints: BoxConstraints.tight(Size.infinite),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white30,
+                      Colors.white70
+                    ], // Define your gradient colors
+                    begin: Alignment
+                        .bottomCenter, // Adjust the start point as needed
+                    end:
+                        Alignment.topCenter, // Adjust the end point as needed
+                  ),
+                  borderRadius: BorderRadius.circular(
+                      10), // Match the button's border radius
+                ),
+                child: Column(
+                  children: [
+                    Image.asset('assets/photos/image8.png'),
+                    Text(
+                      'Maths',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: Colors.black,
+                        overflow: TextOverflow.fade,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Text("extra data"),
+                  ],
+                ),
+              ),
+            )),
       ),
     );
   }

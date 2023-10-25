@@ -98,11 +98,17 @@ class _MenuScreenState extends State<MenuScreen> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             elevation: 0, backgroundColor: Colors.white),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => asset['route']));
+                        onPressed: () async {
+                          if (asset['text'] == 'Logout') {
+                            AuthenticationServices authService =
+                                AuthenticationServices();
+                            await authService.signOut();
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => asset['route']));
+                          }
                         },
                         child: Row(
                           children: [
@@ -149,16 +155,6 @@ class _MenuScreenState extends State<MenuScreen> {
                           },
                           icon: Icon(Icons.arrow_back_sharp),
                           label: Text("Back to Home")),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(45, 20, 45, 20),
-                      child: TextButton.icon(
-                          onPressed: () async {
-                            print(context.widget);
-                            await AuthenticationServices().signOut();
-                          },
-                          icon: Icon(Icons.logout),
-                          label: Text("Logout")),
                     ),
                   ],
                 )

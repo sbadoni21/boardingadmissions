@@ -31,7 +31,6 @@ class ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(),
         body: ListView(
           children: [
             Column(

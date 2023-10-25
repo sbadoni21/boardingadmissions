@@ -1,3 +1,4 @@
+import 'package:boardingadmissions/views/schools_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class SchoolList extends StatelessWidget {
@@ -23,7 +24,10 @@ class SchoolList extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        // Handle button press
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SchoolDetailPage()));
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(250, 250, 250, 1),

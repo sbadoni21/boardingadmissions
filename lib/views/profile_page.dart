@@ -1,3 +1,5 @@
+
+
 import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/components/notes_cards.dart';
 import 'package:boardingadmissions/views/studymaterial_page.dart';
@@ -17,7 +19,6 @@ class ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(),
         body: ListView(children: [
           Column(
             children: [
@@ -162,6 +163,25 @@ class ProfilePageState extends State<ProfilePage> {
                   color: Colors.blue,
                   thickness: .5,
                 ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    Text(
+                      "Acheivement",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+              ),
+              AchievementsComponent(),
+              SizedBox(
+                height: 12,
               ),
               AchievementsComponent(),
               Dashboard(),

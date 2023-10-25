@@ -1,6 +1,7 @@
 import 'package:boardingadmissions/services/authentication_service.dart';
 import 'package:boardingadmissions/views/home_page.dart';
 import 'package:boardingadmissions/views/login_page.dart';
+import 'package:boardingadmissions/views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -33,16 +34,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: VideoPlayerScreen(),
-      // home: StreamBuilder(
-      //   stream: AuthenticationServices().firebaseAuth.authStateChanges(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       return HomePage();
-      //     }
-      //     return LoginPage();
-      //   },
-      // ),
+      // theme: ThemeData(fontFamily: 'RobotoMono'),
+
+      // home: HomePage(),
+      home: StreamBuilder(
+        stream: AuthenticationServices().firebaseAuth.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+
+            return HomePage();
+          }
+
+          return LoginPage();
+        },
+      ),
     );
   }
 }

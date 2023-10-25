@@ -5,19 +5,17 @@ import 'package:boardingadmissions/services/pdf_services.dart';
 
 Future<void> processPdfData() async {
   try {
-
-  final Map<String, String> pdfInfo = await pdfData();
+    final Map<String, String> pdfInfo = await pdfData();
     // Now you can access 'name' and 'path' from pdfInfo
-     String name = pdfInfo['name'] ?? "Default Name"; // Use a default value if 'name' is null
-  String path = pdfInfo['path'] ?? "Default Path";
-  List<Map<String, String>> pdfDATA =
-   [
-    {
-      'pdfName': name,
-
-      'onpress': path,
-    }
-  ];
+    String name = pdfInfo['name'] ??
+        "Default Name"; // Use a default value if 'name' is null
+    String path = pdfInfo['path'] ?? "Default Path";
+    List<Map<String, String>> pdfDATA = [
+      {
+        'pdfName': name,
+        'onpress': path,
+      }
+    ];
 
     // Do something with name and path
     print("Name: $name");
@@ -28,8 +26,6 @@ Future<void> processPdfData() async {
     print("Error: $e");
   }
 }
-
- 
 
 class PDFViewerPage extends StatefulWidget {
   // final String pdfUrl;
@@ -45,15 +41,15 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar:CustomAppBar(),
-        // body: SfPdfViewer.asset('assets/files/DECLARATION.pdf'),
+        appBar: CustomAppBar(),
+        body: SfPdfViewer.asset('assets/files/DECLARATION.pdf'),
         // body: SfPdfViewer.network(pdfData(),
         // enableTextSelection: true,
         // canShowScrollHead: true,
         // canShowPageLoadingIndicator: true,
         //  initialScrollOffset: Offset(0, 500),
         //       initialZoomLevel: 1.5
-        
+
         // ),
       ),
     );

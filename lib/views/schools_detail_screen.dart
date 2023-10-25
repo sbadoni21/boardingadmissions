@@ -1,4 +1,6 @@
 import 'package:animated_menu/animated_menu.dart';
+import 'package:boardingadmissions/components/appbar.dart';
+import 'package:boardingadmissions/components/appbar_with_backbtn.dart';
 import 'package:boardingadmissions/views/side_menu_bar.dart';
 
 import 'package:flutter/gestures.dart';
@@ -16,118 +18,7 @@ class _SchoolDetailPageState extends State<SchoolDetailPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 76,
-          elevation: 0,
-          flexibleSpace: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.white.withOpacity(0.8),
-                  Colors.white,
-                ],
-                stops: const [
-                  0.0,
-                  1,
-                ],
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: Image.asset(
-                    'assets/logo.png',
-                    height: 100,
-                    width: 100,
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          showAnimatedMenu(
-                            context: context,
-                            preferredAnchorPoint: Offset(
-                              100, // X-coordinate, adjust as needed
-                              100, // Y-coordinate, adjust as needed
-                            ),
-                            isDismissable: true,
-                            useRootNavigator: true,
-                            menu: AnimatedMenu(
-                              items: [
-                                FadeIn(
-                                  child: Material(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Container(
-                                      height: 170,
-                                      width: 200,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Column(
-                                        children: const [
-                                          SizedBox(height: 10),
-                                          Text('Menu Item 1'),
-                                          Divider(),
-                                          Text('Menu Item 2'),
-                                          Divider(),
-                                          Text('Menu Item 3'),
-                                          Divider(),
-                                          Text('Menu Item 4'),
-                                          Divider(),
-                                          Text('Menu Item 5'),
-                                          SizedBox(height: 10),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.search,
-                            size: 30,
-                            color: Color.fromRGBO(2, 84, 152, 1),
-                          ),
-                          onPressed: () {
-                            // Handle search icon press
-                          },
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.menu,
-                          size: 30,
-                          color: Color.fromRGBO(2, 84, 152, 1),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MenuScreen(),
-                            ),
-                          );
-                          // Handle notifications icon press
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        appBar: CustomAppBarWithBackButton(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(22.0),
           child: Column(
@@ -136,7 +27,7 @@ class _SchoolDetailPageState extends State<SchoolDetailPage> {
               Row(
                 children: [
                   Image.asset(
-                    'school3.png',
+                    'assets/school3.png',
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,

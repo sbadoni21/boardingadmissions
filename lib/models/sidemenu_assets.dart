@@ -1,3 +1,4 @@
+import 'package:boardingadmissions/services/authentication_service.dart';
 import 'package:boardingadmissions/views/chat.dart';
 import 'package:boardingadmissions/views/home_page.dart';
 import 'package:boardingadmissions/views/profile_page.dart';
@@ -13,13 +14,20 @@ List<Map<String, dynamic>> sideMenuItems = [
     "key": "search",
     'route': SearchBarButton()
   },
-  {"icon": Icons.person, "text": "User", "key": "user", 'route': ProfilePage()},
+  {"icon": Icons.person, "text": "NA", "key": "user", 'route': ()},
   {
     "icon": Icons.settings,
     "text": "Settings",
     "key": "settings",
     'route': () {}
   },
-  {"icon": Icons.chat, "text": "Chat", "key": "chat", 'route': Chat()},
-  {"icon": Icons.logout, "text": "Logout", "key": "logout", 'route': () {}},
+  {"icon": Icons.chat, "text": "Chat", "key": "chat", 'route': () {}},
+  {
+    "icon": Icons.logout,
+    "text": "Logout",
+    "key": "logout",
+    "route": () async {
+      
+    }
+  }
 ];

@@ -1,3 +1,4 @@
+import 'package:boardingadmissions/components/appbar_with_backbtn.dart';
 import 'package:boardingadmissions/components/search_bar.dart';
 import 'package:boardingadmissions/views/side_menu_bar.dart';
 
@@ -31,69 +32,7 @@ class _SearchBarButtonState extends State<SearchBarButton> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            toolbarHeight: 76,
-            elevation: 0,
-            flexibleSpace: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.white.withOpacity(0.8),
-                    Colors.white,
-                  ],
-                  stops: const [
-                    0.0,
-                    1,
-                  ],
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: Image.asset(
-                      'assets/logo.png',
-                      height: 100,
-                      width: 100,
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.search,
-                              size: 30, color: Color.fromRGBO(2, 84, 152, 1)),
-                          onPressed: () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SearchBarButton()))
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.menu,
-                              size: 30, color: Color.fromRGBO(2, 84, 152, 1)),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MenuScreen()));
-                            // Handle notifications icon press
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          appBar: CustomAppBarWithBackButton(),
           body: ListView(children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
