@@ -1,9 +1,15 @@
+import 'dart:async';
+
 import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/components/dreamschool_component.dart';
+import 'package:boardingadmissions/components/loading_screen.dart';
 import 'package:boardingadmissions/components/sample_classes.dart';
 import 'package:boardingadmissions/views/chat.dart';
+import 'package:boardingadmissions/views/chatapp.dart';
+import 'package:boardingadmissions/views/chatpage.dart';
 import 'package:boardingadmissions/views/profile_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FaqItem {
@@ -25,8 +31,10 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-
+  bool isLoading = true;
   final PageController _pageController = PageController(initialPage: 0);
+
+
   @override
   void dispose() {
     _pageController.dispose(); // Dispose the PageController
@@ -78,6 +86,10 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    return homeScreenPage();
+  }
+
+  Widget homeScreenPage() {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(),
@@ -86,7 +98,7 @@ class HomePageState extends State<HomePage> {
           children: [
             buildHomePage(),
             ProfilePage(),
-            buildNotificationScreen(),
+            ChatApp(),
             Chat(), // Replace with your SettingsScreen
           ],
         ),
@@ -219,6 +231,7 @@ class HomePageState extends State<HomePage> {
         ),
       ),
     );
+    ;
   }
 
   Widget buildHomePage() {

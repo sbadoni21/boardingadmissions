@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class Dashboard extends StatefulWidget {
+class TeacherInfoDashboard extends StatefulWidget {
   @override
-  _DashboardState createState() => _DashboardState();
+  _TeacherInfoDashboardState createState() => _TeacherInfoDashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _TeacherInfoDashboardState extends State<TeacherInfoDashboard> {
   int selectedQueryIndex = 0;
   final PageController _pageController = PageController(initialPage: 0);
 
@@ -67,10 +67,10 @@ class _DashboardState extends State<Dashboard> {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             alignment: Alignment.centerLeft,
             child: Text(
-              "Dashboard",
+              "Faculty Description",
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.blue,
@@ -108,60 +108,60 @@ class _DashboardState extends State<Dashboard> {
                     elevation: 2,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      color: Colors.white, // Background color for the selected query
+                      color: Colors
+                          .white, // Background color for the selected query
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            height: 300 / queries.length,
-
-                            width: MediaQuery.of(context).size.width,
-                            child: PageView.builder(itemBuilder: (context, index){
-                              return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white70,
-                                  foregroundColor: Colors.blue,
-                                ),
-                                onPressed: () {},
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      query['Query'] as String,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                              height: 300 / queries.length,
+                              width: MediaQuery.of(context).size.width,
+                              child: PageView.builder(
+                                  itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.white70,
+                                      foregroundColor: Colors.blue,
                                     ),
-                                    CircularPercentIndicator(
-                                      radius: 100 / queries.length,
-                                      animation: true,
-                                      animationDuration: 1200,
-                                      lineWidth: 5,
-                                      // percent: query['progress']
-                                      // ,
-                                      percent: 0.5,
-                                      center: Text(
-                                       
-                                       "dskjb",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
+                                    onPressed: () {},
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          query['Query'] as String,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                      circularStrokeCap: CircularStrokeCap.butt,
-                                      backgroundColor: Colors.yellow,
-                                      progressColor: Colors.green,
+                                        CircularPercentIndicator(
+                                          radius: 100 / queries.length,
+                                          animation: true,
+                                          animationDuration: 1200,
+                                          lineWidth: 5,
+                                          // percent: query['progress']
+                                          // ,
+                                          percent: 0.5,
+                                          center: Text(
+                                            "dskjb",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          circularStrokeCap:
+                                              CircularStrokeCap.butt,
+                                          backgroundColor: Colors.yellow,
+                                          progressColor: Colors.green,
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                            );
-
-                            })
-                          ),
+                                  ),
+                                );
+                              })),
                         ],
                       ),
                     ),
@@ -175,7 +175,3 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 }
-
-
-
-

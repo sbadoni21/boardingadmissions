@@ -48,7 +48,7 @@ dependencies:
   http: ^1.1.0
   just_audio: ^0.9.35
   logger: ^2.0.2+1
-
+  percent_indicator: ^4.2.3
   path: ^1.8.3
   
   path_provider: ^2.1.1
@@ -83,6 +83,12 @@ flutter:
     - assets/files/DECLARATION.pdf
     - assets/videos/cat.mp4
     - assets/videos/sigma.mp4 
+    - assets/riv_files/splashscreen.riv
+    - assets/riv_files/loadingscreen.riv
+    - assets/riv_files/loadingscreen2.riv
+    - assets/photos/contact.png
+    - assets/photos/suggestions.png
+    - assets/photos/queries.png
   # fonts:
 
   #   - family: RobotoMono

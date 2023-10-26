@@ -2,7 +2,10 @@ import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/models/sidemenu_assets.dart';
 import 'package:boardingadmissions/services/authentication_service.dart';
 import 'package:boardingadmissions/views/home_page.dart';
+import 'package:boardingadmissions/views/login_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -12,6 +15,33 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  String? displayName;
+  @override
+  void initState() {
+    fetchDisplayName();
+  }
+
+  void fetchDisplayName() async {
+    // Replace 'users' with the path to your collection containing user data
+    final userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(_firebaseAuth.currentUser!.uid);
+
+    userDoc.get().then((doc) {
+      if (doc.exists) {
+        final userData = doc.data() as Map<String, dynamic>;
+        setState(() {
+          displayName = userData[
+              'displayName']; 
+          // Adjust the field name as per your database structure
+        });
+      }
+    }).catchError((error) {
+      print('Error fetching display name: $error');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,7 +64,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           height: 250,
 
                           color: Colors.white,
-                          child: Center(
+                          child: const Center(
                             child: Icon(
                               Icons.work,
                               size: 60,
@@ -70,15 +100,17 @@ class _MenuScreenState extends State<MenuScreen> {
                                       fontSize: 32,
                                       fontWeight: FontWeight.w700),
                                 ),
+                               Text(
+  displayName as String,
+  style: TextStyle(
+    color: const Color.fromARGB(255, 15, 33, 47),
+    fontSize: 28,
+    fontWeight: FontWeight.w700,
+  ),
+),
+
                                 Text(
-                                  "UserName",
-                                  style: TextStyle(
-                                      color: Colors.blue,
-                                      fontSize: 38,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  "UserId",
+                                  _firebaseAuth.currentUser!.email as String,
                                   style: TextStyle(
                                       color: Colors.black38,
                                       fontSize: 18,
@@ -103,6 +135,10 @@ class _MenuScreenState extends State<MenuScreen> {
                             AuthenticationServices authService =
                                 AuthenticationServices();
                             await authService.signOut();
+                            Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+        builder: (context) => LoginPage()));
                           } else {
                             Navigator.push(
                                 context,

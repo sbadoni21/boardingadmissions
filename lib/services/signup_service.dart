@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class signup_service {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   Future<void> registerUser({
     required String name,
@@ -20,12 +20,10 @@ class signup_service {
 
       if (userCredential.user != null) {
         // Save additional user data to Firestore
-        await _firestore.collection('users').doc(userCredential.user!.uid).set({
-          'name': name,
-          'class': selectedClass,
-          'location': location,
-          // Add more fields as needed
-        });
+        await _fireStore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({'uid': userCredential.user!.uid, 'email':email, 'username':name},SetOptions(merge: true));
 
         // User registration successful, you can navigate to a new page or perform other actions.
       }

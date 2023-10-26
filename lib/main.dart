@@ -5,7 +5,6 @@ import 'package:boardingadmissions/views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:boardingadmissions/components/video_player.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,29 +21,45 @@ Future<void> main() async {
       ),
     );
     logger.i("connected");
-    runApp(const MyApp());
+    runApp(MyApp());
   } catch (e) {
     logger.e(e);
   }
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final AuthenticationServices authServices = AuthenticationServices();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // theme: ThemeData(fontFamily: 'RobotoMono'),
-
-      // home: HomePage(),
+      title: 'Boarding Admissions',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: StreamBuilder(
-        stream: AuthenticationServices().firebaseAuth.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
+        stream: authServices.firebaseAuth.authStateChanges(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return SplashScreen();
+          }
 
+          if (snapshot.hasError) {
+            print("Error with the stream: ${snapshot.error}");
+            return Center(child: Text("An error occurred."));
+          }
+
+          if (snapshot.hasData && snapshot.data != null) {
+            print("User is authenticated. Navigating to HomePage.");
             return HomePage();
           }
 
+          print("User is not authenticated. Navigating to LoginPage.");
           return LoginPage();
         },
       ),

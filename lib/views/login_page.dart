@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:boardingadmissions/components/loading_screen.dart';
 import 'package:boardingadmissions/services/authentication_service.dart';
 import 'package:boardingadmissions/views/home_page.dart';
 import 'package:boardingadmissions/views/password_reset_page.dart';
@@ -19,6 +20,7 @@ class LoginPageState extends State<LoginPage> {
   bool isPasswordVisible = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  
 
   @override
   void initState() {
@@ -150,7 +152,7 @@ class LoginPageState extends State<LoginPage> {
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => HomePage()),
+                                      builder: (context) => LoadingScreen()),
                                   (route) => false);
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -196,13 +198,27 @@ class LoginPageState extends State<LoginPage> {
                       const SizedBox(
                         height: 3,
                       ),
-                      ElevatedButton(
-                          onPressed: () async {
-                            await AuthenticationServices().signInWithGoogle();
-                          },
-                          child: const Text(
-                            "Google",
-                          )),
+                     ElevatedButton(
+    onPressed: () async {
+      User? user = await AuthenticationServices()
+          .signInWithGoogle();
+      if (user != null) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomePage()),
+            (route) => false);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Google Sign-in failed."),
+          ),
+        );
+      }
+    },
+    child: const Text(
+      "Google",
+    )),
                       const SizedBox(
                         height: 20,
                       ),

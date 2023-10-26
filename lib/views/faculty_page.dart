@@ -1,4 +1,5 @@
 import 'package:boardingadmissions/components/appbar.dart';
+import 'package:boardingadmissions/components/appbar_with_backbtn.dart';
 import 'package:boardingadmissions/components/list_tile.dart';
 import 'package:boardingadmissions/components/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class _FacultyInfoState extends State<FacultyInfo> {
     return SafeArea(
       child: Material(
         child: Scaffold(
-          appBar: CustomAppBar(),
+          appBar: CustomAppBarWithBackButton(),
           body: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(

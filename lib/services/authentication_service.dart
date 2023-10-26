@@ -1,5 +1,6 @@
+import 'dart:ui';
 
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart'; // Import the email_validator package
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -7,6 +8,7 @@ import 'package:random_string/random_string.dart';
 
 class AuthenticationServices {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   // Sign in with email and password
   Future<User?> signIn(String email, String password) async {
@@ -16,6 +18,11 @@ class AuthenticationServices {
         email: email,
         password: password,
       );
+
+      _fireStore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({'uid': userCredential.user!.uid, 'email': email});
       return userCredential.user;
     } catch (e) {
       print("Error during sign-in: $e");
@@ -67,26 +74,40 @@ class AuthenticationServices {
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth =
             await googleUser.authentication;
-        final credential = GoogleAuthProvider.credential(
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
+
         UserCredential userCredential =
             await firebaseAuth.signInWithCredential(credential);
-        return userCredential.user;
+
+        if (userCredential.user != null) {
+          final email = userCredential.user!.providerData[0].email;
+          final uid = userCredential.user!.uid;
+          final displayName = userCredential.user!.displayName;
+
+          // Store user data in Firestore
+          _fireStore
+              .collection('users')
+              .doc(uid)
+              .set({'uid': uid, 'email': email, 'displayName': displayName});
+          print(displayName);
+
+          return userCredential.user;
+        }
       }
     } catch (e) {
-      print(e);
+      print('Failed to sign in with Google: $e');
     }
   }
 
   Future signOut() async {
     await GoogleSignIn().signOut();
     await firebaseAuth.signOut();
-    
   }
 }
-
 
 // For deleting account to be made as a option in settings bar after completeing
 Future<void> deleteAccount() async {
