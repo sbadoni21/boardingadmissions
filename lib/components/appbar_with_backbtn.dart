@@ -5,8 +5,10 @@ import 'package:boardingadmissions/views/search_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBarWithBackButton extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBarWithBackButton({super.key});
+
   @override
-  Size get preferredSize => Size.fromHeight(76.0);
+  Size get preferredSize => const Size.fromHeight(76.0);
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -31,9 +33,9 @@ class CustomAppBarWithBackButton extends StatelessWidget implements PreferredSiz
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()))
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePage()))
           ;}, 
-          icon: Icon(Icons.arrow_back, color: Colors.blue,)),
+          icon: const Icon(Icons.arrow_back, color: Colors.blue,)),
             Container(
               width: 150,
               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -56,7 +58,7 @@ class CustomAppBarWithBackButton extends StatelessWidget implements PreferredSiz
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SearchBarButton()));
+                              builder: (context) => const SearchBarButton()));
                       // Handle notifications icon press
                     },
                   ),
@@ -70,7 +72,7 @@ class CustomAppBarWithBackButton extends StatelessWidget implements PreferredSiz
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MenuScreen()));
+                              builder: (context) => const MenuScreen()));
                       // Handle notifications icon press
                     },
                   ),

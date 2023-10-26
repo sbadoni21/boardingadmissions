@@ -3,6 +3,8 @@ import 'package:boardingadmissions/views/side_menu_bar.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatefulWidget {
+  const NotificationPage({super.key});
+
   @override
   _NotificationPageState createState() => _NotificationPageState();
 }
@@ -75,7 +77,7 @@ class _NotificationPageState extends State<NotificationPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MenuScreen()));
+                                  builder: (context) => const MenuScreen()));
                           // Handle notifications icon press
                         },
                       ),
@@ -102,10 +104,10 @@ class _NotificationPageState extends State<NotificationPage> {
 
     return Container(
       color: backgroundColor,
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Text(
         notification.content,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 18.0,
         ),

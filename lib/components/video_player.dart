@@ -59,7 +59,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       setState(() {});
 
       _positionUpdateTimer =
-          Timer.periodic(Duration(milliseconds: 500), (timer) {
+          Timer.periodic(const Duration(milliseconds: 500), (timer) {
         if (mounted) {
           setState(() {});
         }
@@ -108,7 +108,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         body: ListView(
           children: [
             FutureBuilder(
@@ -120,7 +120,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       child: VideoPlayer(_controller),
                     );
                   } else {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
@@ -133,8 +133,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "${_formatDuration(_controller.value.position)}", // Format the duration for display
-                      style: TextStyle(
+                      _formatDuration(_controller.value.position), // Format the duration for display
+                      style: const TextStyle(
                         color: Colors.black,
                       ),
                     ),
@@ -142,8 +142,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   Container(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      "${_formatDuration(_controller.value.duration)}", // Format the duration for display
-                      style: TextStyle(
+                      _formatDuration(_controller.value.duration), // Format the duration for display
+                      style: const TextStyle(
                         color: Colors.black,
                       ),
                     ),
@@ -199,17 +199,17 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     onPressed: () {
                       setState(() {
                         final newPosition =
-                            _controller.value.position - Duration(seconds: 10);
+                            _controller.value.position - const Duration(seconds: 10);
                         _controller.seekTo(newPosition);
                       });
                     },
-                    icon: Icon(Icons.replay_10_rounded),
+                    icon: const Icon(Icons.replay_10_rounded),
                   ),
                   TextButton(
                     onPressed: () {
                       _loadPreviousVideo();
                     },
-                    child: Icon(Icons.skip_previous),
+                    child: const Icon(Icons.skip_previous),
                   ),
                   IconButton(
                     style: ElevatedButton.styleFrom(),
@@ -230,17 +230,17 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     onPressed: () {
                       _loadNextVideo();
                     },
-                    icon: Icon(Icons.skip_next),
+                    icon: const Icon(Icons.skip_next),
                   ),
                   IconButton(
                     onPressed: () {
                       setState(() {
                         final newPosition =
-                            _controller.value.position + Duration(seconds: 10);
+                            _controller.value.position + const Duration(seconds: 10);
                         _controller.seekTo(newPosition);
                       });
                     },
-                    icon: Icon(Icons.forward_10_rounded),
+                    icon: const Icon(Icons.forward_10_rounded),
                   ),
                   IconButton(
                     onPressed: () {
@@ -259,7 +259,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               child: GestureDetector(
                 onTap: _toggleExpansion,
                 child: AnimatedContainer(
-                  duration: Duration(milliseconds: 100),
+                  duration: const Duration(milliseconds: 100),
                   height: isExpanded
                       ? 150.0
                       : 60.0, // Adjust the initial and expanded heights
@@ -268,7 +268,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       ? Container(
                           color: Colors.amber,
                           // width: double.infinity,
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text('Line 1'),
@@ -282,7 +282,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         )
                       : Container(
                           // width: double.infinity,
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('Line 1'),
@@ -294,8 +294,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(12, 10, 12, 0),
               child: Row(
                 children: [
                   Text(
@@ -312,7 +312,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 decoration: InputDecoration(
                   hintText: 'Add a public comment...',
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.send),
+                    icon: const Icon(Icons.send),
                     onPressed: () {
                       final newComment =
                           Comment('User', commentController.text, DateTime.now());
@@ -327,7 +327,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               width: 250,
               height: 300,
               child: ListView.builder(
@@ -336,7 +336,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 itemBuilder: (context, index) {
                   final comment = comments[index];
                   return ListTile(
-                    leading: Icon(Icons
+                    leading: const Icon(Icons
                         .account_circle), // You can replace this with a user's profile picture
                     title: Text(comment.userName),
                     subtitle: Text(comment.text),

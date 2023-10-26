@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SchoolList extends StatelessWidget {
   final List<Map<String, String>> schools;
 
-  SchoolList({required this.schools});
+  const SchoolList({super.key, required this.schools});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class SchoolList extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SchoolDetailPage()));
+                                builder: (context) => const SchoolDetailPage()));
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
@@ -42,7 +42,7 @@ class SchoolList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
                             child: Image.asset(
                               imageUrl,
                               height: 60,
@@ -53,12 +53,12 @@ class SchoolList extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
                     schoolName,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 13,
                         color: Colors.blue,
                         fontWeight: FontWeight.w600),

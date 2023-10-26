@@ -3,7 +3,7 @@ import 'package:boardingadmissions/views/login_page.dart';
 import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 500), _fadeIn);
+    Timer(const Duration(milliseconds: 500), _fadeIn);
   }
 
   void _fadeIn() {
@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       setState(() {
         opacityLevel = 1.0;
       });
-      Timer(Duration(seconds: 2), _moveLogoUp);
+      Timer(const Duration(seconds: 2), _moveLogoUp);
     }
   }
 
@@ -33,10 +33,10 @@ class _SplashScreenState extends State<SplashScreen> {
       setState(() {
         logoPosition = -100.0; // Adjust the value for the desired position
       });
-      Timer(Duration(seconds: 2), () {
+      Timer(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
+          MaterialPageRoute(builder: (context) => const LoginPage()),
         );
       });
     }
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
             alignment: Alignment.center,
             children: [
               AnimatedOpacity(
-                duration: Duration(seconds: 2),
+                duration: const Duration(seconds: 2),
                 opacity: opacityLevel,
                 child: Image.asset(
                   'assets/logo.png',
@@ -61,10 +61,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
               AnimatedPositioned(
-                duration: Duration(seconds: 2),
+                duration: const Duration(seconds: 2),
                 curve: Curves.easeInOut,
                 top: logoPosition,
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Add your login content here

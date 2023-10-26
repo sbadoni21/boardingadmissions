@@ -1,4 +1,3 @@
-import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/components/appbar_with_backbtn.dart';
 import 'package:boardingadmissions/components/list_tile.dart';
 import 'package:boardingadmissions/components/search_bar.dart';
@@ -17,21 +16,21 @@ class _FacultyInfoState extends State<FacultyInfo> {
     return SafeArea(
       child: Material(
         child: Scaffold(
-          appBar: CustomAppBarWithBackButton(),
+          appBar: const CustomAppBarWithBackButton(),
           body: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
-                SearchBarWithButton(hintText: "Search here..."),
-                SizedBox(
+                const SearchBarWithButton(hintText: "Search here..."),
+                const SizedBox(
                   height: 12,
                 ),
-                Text(
+                const Text(
                   "Staff Available for Student",
                   textAlign: TextAlign.left,
                   style: TextStyle(fontSize: 13, color: Colors.blueAccent),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 ListTileWithPhoto(

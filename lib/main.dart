@@ -13,7 +13,7 @@ Future<void> main() async {
   );
   try {
     await Firebase.initializeApp(
-      options: FirebaseOptions(
+      options: const FirebaseOptions(
         apiKey: "AIzaSyAVWrB9v-jqhkurev2Bbqf8bRyskX1djWY",
         appId: "1:231034076515:android:1c99224cdd38922cc56756",
         messagingSenderId: "231034076515",
@@ -21,13 +21,15 @@ Future<void> main() async {
       ),
     );
     logger.i("connected");
-    runApp(MyApp());
+    runApp(const MyApp());
   } catch (e) {
     logger.e(e);
   }
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -46,21 +48,21 @@ class _MyAppState extends State<MyApp> {
         stream: authServices.firebaseAuth.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return SplashScreen();
+            return const SplashScreen();
           }
 
           if (snapshot.hasError) {
             print("Error with the stream: ${snapshot.error}");
-            return Center(child: Text("An error occurred."));
+            return const Center(child: Text("An error occurred."));
           }
 
           if (snapshot.hasData && snapshot.data != null) {
             print("User is authenticated. Navigating to HomePage.");
-            return HomePage();
+            return const HomePage();
           }
 
           print("User is not authenticated. Navigating to LoginPage.");
-          return LoginPage();
+          return const LoginPage();
         },
       ),
     );

@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   LoginPageState createState() => LoginPageState();
@@ -27,7 +27,7 @@ class LoginPageState extends State<LoginPage> {
     super.initState();
 
     // Start a timer for the logo position and content animation
-    Timer(Duration(seconds: 1), _animateLogoAndContent);
+    Timer(const Duration(seconds: 1), _animateLogoAndContent);
   }
 
   void _animateLogoAndContent() {
@@ -55,7 +55,7 @@ class LoginPageState extends State<LoginPage> {
               children: [
                 // Logo with position animation
                 AnimatedPositioned(
-                  duration: Duration(
+                  duration: const Duration(
                       seconds: 1), // Duration for the position animation
                   curve: Curves.easeInOut, // Adjust the curve as needed
                   top: logoPosition,
@@ -70,7 +70,7 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 // Other login content with delayed appearance
                 AnimatedOpacity(
-                  duration: Duration(
+                  duration: const Duration(
                       seconds: 1), // Duration for the fade-in animation
                   opacity: logoPosition == -5.0 ? 1.0 : 0.0,
                   child: Column(
@@ -81,17 +81,17 @@ class LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.fromLTRB(30, 100, 30, 0),
                         child: Column(
                           children: [
-                            SizedBox(height: 100),
+                            const SizedBox(height: 100),
                             TextField(
                               controller: emailController,
-                              style: TextStyle(color: Colors.black),
-                              decoration: InputDecoration(hintText: 'Email'),
+                              style: const TextStyle(color: Colors.black),
+                              decoration: const InputDecoration(hintText: 'Email'),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             TextField(
                               controller: passwordController,
                               obscureText: !isPasswordVisible,
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                               decoration: InputDecoration(
                                 hintText: 'Password',
                                 suffixIcon: IconButton(
@@ -109,7 +109,7 @@ class LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 10),
                       Container(
-                        padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -118,14 +118,14 @@ class LoginPageState extends State<LoginPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ResetPasswordPage(),
+                                    builder: (context) => const ResetPasswordPage(),
                                   ),
                                 );
                               },
                               style: TextButton.styleFrom(
                                 foregroundColor: Colors.black87,
                               ),
-                              child: Text('Forgot password'),
+                              child: const Text('Forgot password'),
                             ),
                           ],
                         ),
@@ -136,7 +136,7 @@ class LoginPageState extends State<LoginPage> {
                           if (emailController.text.isEmpty ||
                               passwordController.text.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content: Text(
                                     "Please enter both email and password"),
                               ),
@@ -152,11 +152,11 @@ class LoginPageState extends State<LoginPage> {
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoadingScreen()),
+                                      builder: (context) => const LoadingScreen()),
                                   (route) => false);
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                const SnackBar(
                                   content: Text(
                                       "Sign-in failed. Please check your credentials and try again."),
                                 ),
@@ -169,10 +169,10 @@ class LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                        child: Container(
+                        child: const SizedBox(
                           width: 200,
                           height: 50,
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               "Sign In",
                               style: TextStyle(color: Colors.white),
@@ -187,7 +187,7 @@ class LoginPageState extends State<LoginPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Container(
+                      SizedBox(
                         height: 30,
                         width: 30,
                         child: Image.asset(
@@ -206,11 +206,11 @@ class LoginPageState extends State<LoginPage> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) => HomePage()),
+                builder: (context) => const HomePage()),
             (route) => false);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text("Google Sign-in failed."),
           ),
         );
@@ -244,23 +244,22 @@ class LoginPageState extends State<LoginPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SignUpPage(),
+                              builder: (context) => const SignUpPage(),
                             ),
                           );
                           // Your button click logic here
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          onPrimary: Colors.blue,
+                          foregroundColor: Colors.blue, backgroundColor: Colors.white,
                           side: const BorderSide(color: Colors.blue, width: 2),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),
                           ),
                         ),
-                        child: Container(
+                        child: const SizedBox(
                           width: 180,
                           height: 50,
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               'Sign up',
                               style: TextStyle(fontSize: 18),

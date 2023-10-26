@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class TeacherInfoDashboard extends StatefulWidget {
+  const TeacherInfoDashboard({super.key});
+
   @override
   _TeacherInfoDashboardState createState() => _TeacherInfoDashboardState();
 }
@@ -35,9 +37,9 @@ class _TeacherInfoDashboardState extends State<TeacherInfoDashboard> {
 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: isActive ? Colors.white : Colors.white54,
+        backgroundColor: isActive ? Colors.white : Colors.white54,
         elevation: isActive ? 2 : 0,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(10.0), // Rounded top corners
             bottom: Radius.zero, // Sharp bottom corners
@@ -49,7 +51,7 @@ class _TeacherInfoDashboardState extends State<TeacherInfoDashboard> {
           selectedQueryIndex = index;
           _pageController.animateToPage(
             index,
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             curve: Curves.ease,
           );
         });
@@ -67,9 +69,9 @@ class _TeacherInfoDashboardState extends State<TeacherInfoDashboard> {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             alignment: Alignment.centerLeft,
-            child: Text(
+            child: const Text(
               "Faculty Description",
               style: TextStyle(
                 fontSize: 20,
@@ -89,7 +91,7 @@ class _TeacherInfoDashboardState extends State<TeacherInfoDashboard> {
               ],
             ),
           ),
-          Container(
+          SizedBox(
             height: 300,
             child: PageView.builder(
               itemCount: queries.length,
@@ -113,7 +115,7 @@ class _TeacherInfoDashboardState extends State<TeacherInfoDashboard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
+                          SizedBox(
                               height: 300 / queries.length,
                               width: MediaQuery.of(context).size.width,
                               child: PageView.builder(
@@ -132,7 +134,7 @@ class _TeacherInfoDashboardState extends State<TeacherInfoDashboard> {
                                       children: [
                                         Text(
                                           query['Query'] as String,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -145,7 +147,7 @@ class _TeacherInfoDashboardState extends State<TeacherInfoDashboard> {
                                           // percent: query['progress']
                                           // ,
                                           percent: 0.5,
-                                          center: Text(
+                                          center: const Text(
                                             "dskjb",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,

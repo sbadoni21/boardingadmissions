@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SearchBarWithButton extends StatefulWidget {
   final String hintText;
 
-  const SearchBarWithButton({Key? key, required this.hintText}) : super(key: key);
+  const SearchBarWithButton({super.key, required this.hintText});
 
   @override
   State<SearchBarWithButton> createState() => _SearchBarWithButtonState();

@@ -17,7 +17,7 @@ class _ChatAppState extends State<ChatApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarWithBackButton(),
+      appBar: const CustomAppBarWithBackButton(),
       body: _buildUserList(),
     );
   }

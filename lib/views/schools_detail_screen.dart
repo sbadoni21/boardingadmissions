@@ -1,12 +1,11 @@
-import 'package:animated_menu/animated_menu.dart';
-import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/components/appbar_with_backbtn.dart';
-import 'package:boardingadmissions/views/side_menu_bar.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SchoolDetailPage extends StatefulWidget {
+  const SchoolDetailPage({super.key});
+
   @override
   _SchoolDetailPageState createState() => _SchoolDetailPageState();
 }
@@ -18,7 +17,7 @@ class _SchoolDetailPageState extends State<SchoolDetailPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBarWithBackButton(),
+        appBar: const CustomAppBarWithBackButton(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(22.0),
           child: Column(
@@ -257,7 +256,7 @@ class _SchoolDetailPageState extends State<SchoolDetailPage> {
             text: showFullText
                 ? text
                 : (text.length > maxLines * 35
-                    ? text.substring(0, maxLines * 35) + '...'
+                    ? '${text.substring(0, maxLines * 35)}...'
                     : text),
             style: const TextStyle(
               fontSize: 16.0,

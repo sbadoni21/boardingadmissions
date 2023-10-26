@@ -4,7 +4,7 @@ class BottomNavigation extends StatefulWidget {
   final int currentIndex;
   final Function(int) onTabTapped;
 
-  BottomNavigation({
+  const BottomNavigation({super.key, 
     required this.currentIndex,
     required this.onTabTapped,
   });

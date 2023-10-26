@@ -6,7 +6,7 @@ class ListTileWithPhoto extends StatelessWidget {
   final VoidCallback onCallPressed;
   final VoidCallback onTextPressed;
 
-  ListTileWithPhoto({
+  const ListTileWithPhoto({super.key, 
     required this.imageUrl,
     required this.onProfilePressed,
     required this.onCallPressed,
@@ -19,21 +19,21 @@ class ListTileWithPhoto extends StatelessWidget {
       leading: CircleAvatar(
         backgroundImage: NetworkImage(imageUrl), // Replace with your image URL
       ),
-      title: Text('List Tile Title'), // Replace with your title
-      subtitle: Text('List Tile Subtitle'), // Replace with your subtitle
+      title: const Text('List Tile Title'), // Replace with your title
+      subtitle: const Text('List Tile Subtitle'), // Replace with your subtitle
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             onPressed: onProfilePressed,
           ),
           IconButton(
-            icon: Icon(Icons.call),
+            icon: const Icon(Icons.call),
             onPressed: onCallPressed,
           ),
           IconButton(
-            icon: Icon(Icons.message),
+            icon: const Icon(Icons.message),
             onPressed: onTextPressed,
           ),
         ],

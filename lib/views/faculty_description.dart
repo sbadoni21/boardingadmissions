@@ -3,20 +3,19 @@ import 'package:boardingadmissions/components/teacher_info_component.dart';
 import 'package:boardingadmissions/views/chat.dart';
 import 'package:boardingadmissions/views/faculty_page.dart';
 import 'package:flutter/material.dart';
-import 'package:strings/strings.dart';
 
 List facultymore = [
   {
     'image': "assets/photos/contact.png",
     'text': "Contact",
-    'route': FacultyInfo()
+    'route': const FacultyInfo()
   },
   {
     'image': "assets/photos/suggestions.png",
     'text': "Suggestion",
-    'route': Chat()
+    'route': const Chat()
   },
-  {'image': "assets/photos/queries.png", 'text': "Queries", 'route': Chat()}
+  {'image': "assets/photos/queries.png", 'text': "Queries", 'route': const Chat()}
 ];
 
 class FacultyDescription extends StatefulWidget {
@@ -31,7 +30,7 @@ class _FacultyDescriptionState extends State<FacultyDescription> {
   Widget build(BuildContext context) {
     return Material(
       child: Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         body: ListView(
           children: [
             Padding(
@@ -43,16 +42,16 @@ class _FacultyDescriptionState extends State<FacultyDescription> {
                         color: Colors.blue,
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.circular(10)),
-                    constraints: BoxConstraints.tight(Size.square(200)),
+                    constraints: BoxConstraints.tight(const Size.square(200)),
                     child: Image.asset(
                       "assets/photos/image8.png",
                       scale: 0.7,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -66,27 +65,27 @@ class _FacultyDescriptionState extends State<FacultyDescription> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
               child: Divider(
                 thickness: 0,
                 color: Colors.blueAccent,
               ),
             ),
-            TeacherInfoDashboard(),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
+            const TeacherInfoDashboard(),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
               child: Divider(
                 thickness: 0,
                 color: Colors.blueAccent,
               ),
             ),
             Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: facultymore.map((info) {
-                      return Container(
+                      return SizedBox(
                         width: 120,
                         height: 120,
                         child: ElevatedButton(
@@ -103,7 +102,7 @@ class _FacultyDescriptionState extends State<FacultyDescription> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(info["image"]),
-                              SizedBox(
+                              const SizedBox(
                                 height: 4,
                               ),
                               Text(info['text'])
@@ -112,7 +111,7 @@ class _FacultyDescriptionState extends State<FacultyDescription> {
                         ),
                       );
                     }).toList())),
-            Padding(padding: EdgeInsets.all(20))
+            const Padding(padding: EdgeInsets.all(20))
           ],
         ),
       ),

@@ -4,6 +4,8 @@ import 'package:rive/rive.dart';
 import 'package:boardingadmissions/views/home_page.dart';
 
 class LoadingScreen extends StatefulWidget {
+  const LoadingScreen({super.key});
+
   @override
   _LoadingScreenState createState() => _LoadingScreenState();
 }
@@ -18,12 +20,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void startLoading() async {
     // Simulate loading for 2 seconds
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
   
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => HomePage(), // Replace 'HomePage' with the page you want to navigate to
+        builder: (context) => const HomePage(), // Replace 'HomePage' with the page you want to navigate to
       ),
     );
   }
@@ -31,8 +33,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints.expand(height: double.infinity),
-      child: RiveAnimation.asset("assets/riv_files/loadingscreen.riv"),
+      constraints: const BoxConstraints.expand(height: double.infinity),
+      child: const RiveAnimation.asset("assets/riv_files/loadingscreen.riv"),
     );
   }
 }

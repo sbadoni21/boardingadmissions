@@ -1,9 +1,8 @@
-import 'package:boardingadmissions/components/appbar.dart';
 import 'package:flutter/material.dart' hide VoidCallback;
 import 'package:flutter/widgets.dart' show VoidCallback;
 
 class Chat extends StatefulWidget {
-  Chat({Key? key}) : super(key: key);
+  const Chat({super.key});
 
   @override
   ChatState createState() => ChatState();
@@ -86,7 +85,7 @@ class ChatState extends State<Chat> {
                         alignment: Alignment.topLeft,
                         child: Material(
                           elevation: 4.0,
-                          child: Container(
+                          child: SizedBox(
                             width: double.infinity,
                             child: ListView.builder(
                               shrinkWrap: true,
@@ -112,7 +111,7 @@ class ChatState extends State<Chat> {
                 ),
                 Container(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: TextField()),
+                    child: const TextField()),
                 const SizedBox(
                   height: 20,
                 ),
@@ -196,7 +195,7 @@ class ChatState extends State<Chat> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   height: 300, // Set the height to 100 pixels
                   child: PageView.builder(
                     itemCount: queries.length,
@@ -233,7 +232,7 @@ class ChatState extends State<Chat> {
                     },
                   ),
                 ),
-                Column(
+                const Column(
                   children: [],
                 ),
               ],
