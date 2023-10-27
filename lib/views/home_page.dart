@@ -116,11 +116,14 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
   Widget homeScreenPage() {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppBar(),
+        appBar:  CustomAppBar(),
         body: IndexedStack(
           index: _currentIndex,
           children: [
             buildHomePage(),
+             ProfilePage(),
+             ChatApp(),
+            Chat(), // Replace with your SettingsScreen
             ProfilePage(),
              ChatApp(),
            Chat(), // Replace with your SettingsScreen
