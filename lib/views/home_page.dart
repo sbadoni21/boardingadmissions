@@ -90,14 +90,14 @@ class HomePageState extends State<HomePage> {
   Widget homeScreenPage() {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppBar(),
+        appBar:  CustomAppBar(),
         body: IndexedStack(
           index: _currentIndex,
           children: [
             buildHomePage(),
-            const ProfilePage(),
-            const ChatApp(),
-            const Chat(), // Replace with your SettingsScreen
+             ProfilePage(),
+             ChatApp(),
+            Chat(), // Replace with your SettingsScreen
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
