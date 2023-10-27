@@ -34,7 +34,7 @@ class _MenuScreenState extends State<MenuScreen> {
         final userData = doc.data() as Map<String, dynamic>;
         setState(() {
           displayName = userData['displayName'];
-          displayName = userData['displayName'];
+  
           // Adjust the field name as per your database structure
         });
       }
@@ -84,7 +84,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               color: Colors.blue,
                             ),
                             child: Center(
-                              child: Image.asset("assets/photos/image9.png"),
+                              child: Image.network('profilePhoto'),
                             ),
                           ),
                         ),
