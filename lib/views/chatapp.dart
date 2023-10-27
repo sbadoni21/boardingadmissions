@@ -52,10 +52,11 @@ class _ChatAppState extends State<ChatApp> {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: data['photoURL'] != null
-                      ? data['photoURL']
+                  backgroundImage: data['profilePhoto'] != null
+                      ? NetworkImage('profilePhoto')
+                          as ImageProvider // Cast to ImageProvider
                       : AssetImage(
-                          'assets/photos/image9.png'), // Use the user's profile image URL or a placeholder image
+                          'assets/placeholder_image.png'), // Use a placeholder image
                   radius: 20, // Adjust the size as needed
                 ),
                 SizedBox(

@@ -17,7 +17,8 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   String? displayName;
-  
+  String? profilePhoto;
+
   @override
   void initState() {
     fetchDisplayName();
@@ -34,7 +35,8 @@ class _MenuScreenState extends State<MenuScreen> {
         final userData = doc.data() as Map<String, dynamic>;
         setState(() {
           displayName = userData['displayName'];
-  
+          profilePhoto = userData['profilePhoto'];
+
           // Adjust the field name as per your database structure
         });
       }
@@ -83,18 +85,23 @@ class _MenuScreenState extends State<MenuScreen> {
                               shape: BoxShape.circle,
                               color: Colors.blue,
                             ),
-                            child: Center(
-                              child: Image.network('profilePhoto'),
+                            child: CircleAvatar(
+                              backgroundImage: profilePhoto != null
+                                  ? NetworkImage(profilePhoto!)
+                                      as ImageProvider // Cast to ImageProvider
+                                  : AssetImage(
+                                      'assets/placeholder_image.png'), // Use a placeholder image
+                              radius: 20, // Adjust the size as needed
                             ),
                           ),
                         ),
+
                         Positioned(
                             left: 220,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                             
                                 Text(
                                   "Hi",
                                   style: TextStyle(
@@ -103,20 +110,11 @@ class _MenuScreenState extends State<MenuScreen> {
                                       fontWeight: FontWeight.w700),
                                 ),
                                 Text(
-                                  displayName!=null ? displayName as String : "Username",
-                                  style: const TextStyle(
-                                    color: Color.fromARGB(255, 15, 33, 47),
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                Text(
                                   displayName != null
                                       ? displayName as String
                                       : "Username",
-                                  style: TextStyle(
-                                    color:
-                                        const Color.fromARGB(255, 15, 33, 47),
+                                  style: const TextStyle(
+                                    color: Color.fromARGB(255, 15, 33, 47),
                                     fontSize: 28,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -150,7 +148,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>  LoginPage()));
+                                    builder: (context) => LoginPage()));
                           } else {
                             Navigator.push(
                                 context,
