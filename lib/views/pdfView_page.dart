@@ -28,6 +28,8 @@ Future<void> processPdfData() async {
 }
 
 class PDFViewerPage extends StatefulWidget {
+  const PDFViewerPage({super.key});
+
   // final String pdfUrl;
 
   // PDFViewerPage({Key? key, required this.pdfUrl}) : super(key: key);
@@ -41,7 +43,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         body: SfPdfViewer.asset('assets/files/DECLARATION.pdf'),
         // body: SfPdfViewer.network(pdfData(),
         // enableTextSelection: true,

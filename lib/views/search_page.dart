@@ -1,10 +1,11 @@
 import 'package:boardingadmissions/components/appbar_with_backbtn.dart';
 import 'package:boardingadmissions/components/search_bar.dart';
-import 'package:boardingadmissions/views/side_menu_bar.dart';
 
 import 'package:flutter/material.dart';
 
 class SearchBarButton extends StatefulWidget {
+  const SearchBarButton({super.key});
+
   @override
   _SearchBarButtonState createState() => _SearchBarButtonState();
 }
@@ -32,14 +33,14 @@ class _SearchBarButtonState extends State<SearchBarButton> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: CustomAppBarWithBackButton(),
+          appBar: const CustomAppBarWithBackButton(),
           body: ListView(children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: Column(
                 children: [
-                  SearchBarWithButton(hintText: "Search boarding admissions"),
-                  SizedBox(height: 20),
+                  const SearchBarWithButton(hintText: "Search boarding admissions"),
+                  const SizedBox(height: 20),
                   Column(
                     children: searchOptions.map((option) {
                       return Padding(
@@ -50,16 +51,16 @@ class _SearchBarButtonState extends State<SearchBarButton> {
                           ),
                           onPressed: () {},
                           child: Container(
-                            padding: EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(8),
                             child: Column(
                               children: [
                                 Row(
                                   children: [
                                     Image.asset(option["imageUrl"]!),
-                                    SizedBox(width: 25),
+                                    const SizedBox(width: 25),
                                     Text(
                                       option["schoolName"]!,
-                                      style: TextStyle(color: Colors.black),
+                                      style: const TextStyle(color: Colors.black),
                                     )
                                   ],
                                 ),
@@ -70,10 +71,10 @@ class _SearchBarButtonState extends State<SearchBarButton> {
                       );
                     }).toList(),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  Divider(
+                  const Divider(
                     thickness: 1,
                     color: Colors.blue,
                   ),
@@ -146,8 +147,8 @@ class _SearchBarButtonState extends State<SearchBarButton> {
                       }
                     }).toList(),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                     child: Divider(
                       thickness: 1,
                       color: Colors.blue,
@@ -191,7 +192,7 @@ class _SearchBarButtonState extends State<SearchBarButton> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                                    padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
                                     child: Image.asset(
                                       imageUrl,
                                       height: 60,
@@ -201,12 +202,12 @@ class _SearchBarButtonState extends State<SearchBarButton> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
                               schoolName,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 13,
                                   color: Colors.blue,
                                   fontWeight: FontWeight.w600),

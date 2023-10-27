@@ -1,14 +1,12 @@
 
 
-import 'package:boardingadmissions/components/appbar.dart';
-import 'package:boardingadmissions/components/notes_cards.dart';
 import 'package:boardingadmissions/views/studymaterial_page.dart';
 import 'package:flutter/material.dart';
 import 'package:boardingadmissions/components/dashboard.dart';
 import 'package:boardingadmissions/components/achivementsComponent.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   ProfilePageState createState() => ProfilePageState();
@@ -114,7 +112,7 @@ class ProfilePageState extends State<ProfilePage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              StudyMaterial()));
+                                              const StudyMaterial()));
                                 },
                                 icon: const Icon(Icons.note_add_outlined),
                                 color: Colors.blue,
@@ -164,8 +162,8 @@ class ProfilePageState extends State<ProfilePage> {
                   thickness: .5,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
+              const Padding(
+                padding: EdgeInsets.all(20.0),
                 child: Row(
                   children: [
                     Text(
@@ -179,12 +177,12 @@ class ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
               ),
-              AchievementsComponent(),
-              SizedBox(
+              const AchievementsComponent(),
+              const SizedBox(
                 height: 12,
               ),
-              AchievementsComponent(),
-              Dashboard(),
+              const AchievementsComponent(),
+              const Dashboard(),
             ],
           ),
         ]),

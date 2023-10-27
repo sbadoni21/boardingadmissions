@@ -1,12 +1,11 @@
 
-import 'package:boardingadmissions/components/notes_Viewer.dart';
 import 'package:boardingadmissions/views/pdfView_page.dart';
 import 'package:flutter/material.dart';
 
 class NotesCards extends StatelessWidget {
   final int itemCount;
 
-  NotesCards({required this.itemCount});
+  const NotesCards({super.key, required this.itemCount});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class NotesCards extends StatelessWidget {
           itemExtent: 160, // Set the width of each item
           itemCount: itemCount,
           itemBuilder: (context, index) {
-            return NoteCard();
+            return const NoteCard();
           },
         ),
       ),
@@ -28,20 +27,22 @@ class NotesCards extends StatelessWidget {
 }
 
 class NoteCard extends StatelessWidget {
+  const NoteCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
        width: 150, // Adjust the width of each item
-      margin: EdgeInsets.symmetric(horizontal: 10), // Add spacing
+      margin: const EdgeInsets.symmetric(horizontal: 10), // Add spacing
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.elliptical(10, 10)),
+        borderRadius: const BorderRadius.all(Radius.elliptical(10, 10)),
         child: Card(
             elevation: 5,
             shadowColor: Colors.black26,
             borderOnForeground: true,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors
+                backgroundColor: Colors
                     .transparent, // Set the button's background color to transparent
                 // Adjust the padding as needed
                 shape: RoundedRectangleBorder(
@@ -51,12 +52,12 @@ class NoteCard extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PDFViewerPage()));
+                    MaterialPageRoute(builder: (context) => const PDFViewerPage()));
               },
               child: Container(
                 constraints: BoxConstraints.tight(Size.infinite),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [
                       Colors.white30,
                       Colors.white70
@@ -72,7 +73,7 @@ class NoteCard extends StatelessWidget {
                 child: Column(
                   children: [
                     Image.asset('assets/photos/image8.png'),
-                    Text(
+                    const Text(
                       'Maths',
                       textAlign: TextAlign.start,
                       style: TextStyle(
@@ -82,7 +83,7 @@ class NoteCard extends StatelessWidget {
                         fontWeight: FontWeight.w800,
                       ),
                     ),
-                    Text("extra data"),
+                    const Text("extra data"),
                   ],
                 ),
               ),

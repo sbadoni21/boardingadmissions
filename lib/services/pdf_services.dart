@@ -39,11 +39,11 @@ Future uploadPDF(String pdfPath, String fileName) async {
   }
 }
 Future<Map<String, String>> pdfData() async {
-  final String _collection = 'pdf';
+  const String collection = 'pdf';
   String path = '';
   String name = '';
   final QuerySnapshot querySnapshot =
-      await FirebaseFirestore.instance.collection(_collection).get();
+      await FirebaseFirestore.instance.collection(collection).get();
 
   if (querySnapshot.docs.isNotEmpty) {
     final Map<String, dynamic>? firstDocData =

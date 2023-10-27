@@ -4,8 +4,8 @@ import 'package:boardingadmissions/services/authentication_service.dart';
 import 'package:boardingadmissions/views/home_page.dart';
 import 'package:boardingadmissions/views/login_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -17,6 +17,7 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   String? displayName;
+  
   @override
   void initState() {
     fetchDisplayName();
@@ -24,7 +25,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
   void fetchDisplayName() async {
     // Replace 'users' with the path to your collection containing user data
-    final userDoc = await FirebaseFirestore.instance
+    final userDoc = FirebaseFirestore.instance
         .collection('users')
         .doc(_firebaseAuth.currentUser!.uid);
 
@@ -32,6 +33,7 @@ class _MenuScreenState extends State<MenuScreen> {
       if (doc.exists) {
         final userData = doc.data() as Map<String, dynamic>;
         setState(() {
+          displayName = userData['displayName'];
           displayName = userData['displayName'];
           // Adjust the field name as per your database structure
         });
@@ -45,7 +47,7 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: ListView(
         children: [
           Padding(
@@ -77,7 +79,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           child: Container(
                             width: 150,
                             height: 150,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.blue,
                             ),
@@ -92,12 +94,21 @@ class _MenuScreenState extends State<MenuScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                             
                                 Text(
                                   "Hi",
                                   style: TextStyle(
                                       color: Colors.blue,
                                       fontSize: 32,
                                       fontWeight: FontWeight.w700),
+                                ),
+                                Text(
+                                  displayName!=null ? displayName as String : "Username",
+                                  style: const TextStyle(
+                                    color: Color.fromARGB(255, 15, 33, 47),
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
                                 Text(
                                   displayName != null
@@ -112,7 +123,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 ),
                                 Text(
                                   _firebaseAuth.currentUser!.email as String,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black38,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700),
@@ -126,7 +137,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
                 Column(
                   children: sideMenuItems.map((asset) {
-                    return Container(
+                    return SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -139,7 +150,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginPage()));
+                                    builder: (context) =>  LoginPage()));
                           } else {
                             Navigator.push(
                                 context,
@@ -164,7 +175,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             ),
                             Text(
                               asset['text'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.blue,
                               ),
                             ), // Use asset['text'] for the text
@@ -174,7 +185,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     );
                   }).toList(),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
@@ -187,11 +198,11 @@ class _MenuScreenState extends State<MenuScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomePage()));
+                                    builder: (context) => const HomePage()));
                             // Handle notifications icon press
                           },
-                          icon: Icon(Icons.arrow_back_sharp),
-                          label: Text("Back to Home")),
+                          icon: const Icon(Icons.arrow_back_sharp),
+                          label: const Text("Back to Home")),
                     ),
                   ],
                 )

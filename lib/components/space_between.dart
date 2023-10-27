@@ -4,7 +4,7 @@ class SpaceBetween extends StatelessWidget {
   final double verticalPadding;
   final Color dividerColor;
 
-  SpaceBetween({
+  const SpaceBetween({super.key, 
     this.verticalPadding = 12.0,
     this.dividerColor = Colors.blueAccent,
   });

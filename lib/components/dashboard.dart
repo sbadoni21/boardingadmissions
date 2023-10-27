@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
+
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -35,9 +37,9 @@ class _DashboardState extends State<Dashboard> {
 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: isActive ? Colors.white : Colors.white54,
+        backgroundColor: isActive ? Colors.white : Colors.white54,
         elevation: isActive ? 2 : 0,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(10.0), // Rounded top corners
             bottom: Radius.zero, // Sharp bottom corners
@@ -49,7 +51,7 @@ class _DashboardState extends State<Dashboard> {
           selectedQueryIndex = index;
           _pageController.animateToPage(
             index,
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             curve: Curves.ease,
           );
         });
@@ -67,9 +69,9 @@ class _DashboardState extends State<Dashboard> {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             alignment: Alignment.centerLeft,
-            child: Text(
+            child: const Text(
               "Dashboard",
               style: TextStyle(
                 fontSize: 20,
@@ -89,7 +91,7 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
           ),
-          Container(
+          SizedBox(
             height: 300,
             child: PageView.builder(
               itemCount: queries.length,
@@ -112,7 +114,7 @@ class _DashboardState extends State<Dashboard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
+                          SizedBox(
                             height: 300 / queries.length,
 
                             width: MediaQuery.of(context).size.width,
@@ -130,7 +132,7 @@ class _DashboardState extends State<Dashboard> {
                                   children: [
                                     Text(
                                       query['Query'] as String,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -143,7 +145,7 @@ class _DashboardState extends State<Dashboard> {
                                       // percent: query['progress']
                                       // ,
                                       percent: 0.5,
-                                      center: Text(
+                                      center: const Text(
                                        
                                        "dskjb",
                                         style: TextStyle(

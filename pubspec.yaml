@@ -30,7 +30,7 @@ environment:
 dependencies:
   animated_menu: ^1.0.2
   carousel_slider: ^4.0.0
-  cloud_firestore: ^4.9.3
+  cloud_firestore: ^4.12.0
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.3
   easy_search_bar: ^2.5.0
@@ -54,16 +54,12 @@ dependencies:
   path_provider: ^2.1.1
   random_string: ^2.1.0
   rive: ^0.11.17
-  uuid: ^4.1.0
-  flutter_local_notifications: ^16.1.0
-  app_settings: ^5.1.1
-  firebase_messaging: ^14.7.2
   strings: ^2.0.3
   syncfusion_flutter_pdfviewer: ^23.1.41
   video_player: ^2.7.2
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
 

@@ -5,13 +5,13 @@ import 'package:boardingadmissions/components/space_between.dart';
 import 'package:flutter/material.dart';
 
 class StudyMaterial extends StatelessWidget {
-  const StudyMaterial({Key? key});
+  const StudyMaterial({super.key, Key? keys});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         body: ListView(
           children: [
             Padding(
@@ -22,8 +22,8 @@ class StudyMaterial extends StatelessWidget {
                     title: "Class Notes",
                     onSeeAllPressed: () {},
                   ),
-                  NotesCards(itemCount: 10),
-                  SpaceBetween(
+                  const NotesCards(itemCount: 10),
+                  const SpaceBetween(
                     verticalPadding:
                         12.0, // Adjust the vertical padding as needed
                     dividerColor:
@@ -33,8 +33,8 @@ class StudyMaterial extends StatelessWidget {
                     title: "Study Material",
                     onSeeAllPressed: () {},
                   ),
-                  NotesCards(itemCount: 10),
-                  SpaceBetween(
+                  const NotesCards(itemCount: 10),
+                  const SpaceBetween(
                     verticalPadding:
                         12.0, // Adjust the vertical padding as needed
                     dividerColor:
@@ -44,7 +44,7 @@ class StudyMaterial extends StatelessWidget {
                     title: "Assessments",
                     onSeeAllPressed: () {},
                   ),
-                  NotesCards(itemCount: 10),
+                  const NotesCards(itemCount: 10),
                 ],
               ),
             ),

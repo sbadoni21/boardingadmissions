@@ -1,16 +1,12 @@
-import 'dart:async';
 
 import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/components/dreamschool_component.dart';
-import 'package:boardingadmissions/components/loading_screen.dart';
 import 'package:boardingadmissions/components/sample_classes.dart';
 import 'package:boardingadmissions/views/chat.dart';
 import 'package:boardingadmissions/views/chatapp.dart';
-import 'package:boardingadmissions/views/chatpage.dart';
 import 'package:boardingadmissions/views/profile_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FaqItem {
@@ -26,6 +22,8 @@ class FaqItem {
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   HomePageState createState() => HomePageState();
 }
@@ -116,14 +114,14 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
   Widget homeScreenPage() {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         body: IndexedStack(
           index: _currentIndex,
           children: [
             buildHomePage(),
             ProfilePage(),
-            ChatApp(),
-            Chat(), // Replace with your SettingsScreen
+             ChatApp(),
+           Chat(), // Replace with your SettingsScreen
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -255,7 +253,6 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
         ),
       ),
     );
-    ;
   }
 
   Widget buildHomePage() {
@@ -280,7 +277,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
           Container(
             width: 184,
             height: 40,
-            padding: EdgeInsets.only(left: 100, right: 100),
+            padding: const EdgeInsets.only(left: 100, right: 100),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -359,7 +356,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   ExpansionPanelList(
                     elevation: 2,
                     materialGapSize: 5,
-                    expandedHeaderPadding: EdgeInsets.all(10),
+                    expandedHeaderPadding: const EdgeInsets.all(10),
                     expansionCallback: (int index, bool isExpanded) {
                       setState(() {
                         faqItems[index].isExpanded = isExpanded;
@@ -368,7 +365,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
                     children: faqItems.map<ExpansionPanel>((FaqItem faqItem) {
                       return ExpansionPanel(
                         canTapOnHeader: true,
-                        backgroundColor: Color.fromRGBO(248, 248, 248, 1),
+                        backgroundColor: const Color.fromRGBO(248, 248, 248, 1),
                         headerBuilder: (BuildContext context, bool isExpanded) {
                           return ListTile(
                             minVerticalPadding: 10,
@@ -377,14 +374,14 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
                           );
                         },
                         body: Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: Text(faqItem.answer),
                         ),
                         isExpanded: faqItem.isExpanded,
                       );
                     }).toList(),
                   ),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 25))
+                  const Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 25))
                 ])
               ],
             ),
@@ -426,7 +423,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   Widget buildNotificationScreen() {
-    return Center(
+    return const Center(
       child: Text(
         'Notification Screen',
         style: TextStyle(fontSize: 24),

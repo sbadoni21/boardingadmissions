@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 
 
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -48,40 +50,40 @@ class _SignUpPageState extends State<SignUpPage> {
                         width: 200,
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     TextField(
                       onChanged: (value) {
                         setState(() {
                           name = value;
                         });
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Name',
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     TextField(
                       onChanged: (value) {
                         setState(() {
                           email = value;
                         });
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Email',
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     TextField(
                       onChanged: (value) {
                         setState(() {
                           selectedClass = value;
                         });
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Class',
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     // Create a list of DropdownMenuItem for schools
                     DropdownButtonFormField<String>(
                       onChanged: (value) {
@@ -99,12 +101,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           child: Text(school),
                         );
                       }).toList(),
-                      hint: Text('Select School(s)'),
+                      hint: const Text('Select School(s)'),
                       value: selectedSchools.isNotEmpty
                           ? selectedSchools[0]
                           : null,
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     // Display selected schools as chips
                     Wrap(
                       spacing: 8.0,
@@ -120,18 +122,18 @@ class _SignUpPageState extends State<SignUpPage> {
                         );
                       }).toList(),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     TextField(
                       onChanged: (value) {
                         setState(() {
                           location = value;
                         });
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Location',
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     TextField(
                       onChanged: (value) {
                         setState(() {
@@ -139,11 +141,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         });
                       },
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Password',
                       ),
                     ),
-                    SizedBox(height: 80),
+                    const SizedBox(height: 80),
                   ],
                 ),
                 ElevatedButton(
@@ -158,7 +160,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => const HomePage(),
                       ),
                     );
                   },
@@ -169,7 +171,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Container(
+                  child: const SizedBox(
                     width: 180,
                     height: 50,
                     child: Center(
@@ -180,14 +182,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 const Text("or login using"),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   height: 30,
                   width: 30,
                   // decoration: BoxDecoration(color: Colors.blue),
@@ -196,12 +198,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     fit: BoxFit.fitWidth,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 3,
                 ),
                 const Text("Google"),
                 Container(
-                  padding: EdgeInsets.fromLTRB(30, 15, 30, 0),
+                  padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -210,24 +212,24 @@ class _SignUpPageState extends State<SignUpPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LoginPage(),
+                                builder: (context) => const LoginPage(),
                               ),
                             );
                           },
-                          icon: Icon(Icons.arrow_back_sharp)),
+                          icon: const Icon(Icons.arrow_back_sharp)),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginPage(),
+                              builder: (context) => const LoginPage(),
                             ),
                           );
                         },
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.black,
                         ),
-                        child: Text('Sign In'),
+                        child: const Text('Sign In'),
                       ),
                     ],
                   ),

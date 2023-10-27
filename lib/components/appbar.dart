@@ -4,8 +4,10 @@ import 'package:boardingadmissions/views/search_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar({super.key});
+
   @override
-  Size get preferredSize => Size.fromHeight(76.0);
+  Size get preferredSize => const Size.fromHeight(76.0);
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -51,7 +53,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SearchBarButton()));
+                              builder: (context) => const SearchBarButton()));
                       // Handle notifications icon press
                     },
                   ),
@@ -65,7 +67,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MenuScreen()));
+                              builder: (context) => const MenuScreen()));
                       // Handle notifications icon press
                     },
                   ),

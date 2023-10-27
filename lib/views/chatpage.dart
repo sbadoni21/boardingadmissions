@@ -1,4 +1,3 @@
-import 'package:boardingadmissions/components/appbar_with_backbtn.dart';
 import 'package:boardingadmissions/components/chatbubble.dart';
 import 'package:boardingadmissions/services/chat/chat_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -62,7 +61,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Expanded(
             child: Container(
-              margin: EdgeInsets.all(10), // Adjust margin as needed
+              margin: const EdgeInsets.all(10), // Adjust margin as needed
               decoration: BoxDecoration(
                 color: Colors.white, // Set background color
                 borderRadius: BorderRadius.circular(10), // Add rounded corners
@@ -107,9 +106,9 @@ class _ChatPageState extends State<ChatPage> {
           children: [
             Text(
               data['senderEmail'],
-              style: TextStyle(color: Colors.grey),
+              style: const TextStyle(color: Colors.grey),
             ),
-            SizedBox(
+            const SizedBox(
               height: 2,
             ),
             ChatBubble(message: data['message'])

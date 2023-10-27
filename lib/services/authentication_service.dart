@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart'; // Import the email_validator package
@@ -8,7 +7,7 @@ import 'package:random_string/random_string.dart';
 
 class AuthenticationServices {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   // Sign in with email and password
   Future<User?> signIn(String email, String password) async {
@@ -107,6 +106,7 @@ class AuthenticationServices {
     } catch (e) {
       print('Failed to sign in with Google: $e');
     }
+    return null;
   }
 
   Future signOut() async {

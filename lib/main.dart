@@ -28,12 +28,18 @@ Future<void> main() async {
     logger.i("Firebase initialized successfully");
     runApp(MyApp());
     // NotificationService().initialize();
+
+    logger.i("connected");
+    runApp(const MyApp());
+
   } catch (e) {
     logger.e(e);
   }
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -73,11 +79,13 @@ class _MyAppState extends State<MyApp> {
 
           if (snapshot.hasData && snapshot.data != null) {
             print("User is authenticated. Navigating to HomePage.");
-            return HomePage();
+            return const HomePage();
           }
 
           print("User is not authenticated. Navigating to LoginPage.");
+
           return  LoginPage();
+
         },
       ),
     );
