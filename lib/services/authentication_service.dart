@@ -87,12 +87,18 @@ class AuthenticationServices {
           final email = userCredential.user!.providerData[0].email;
           final uid = userCredential.user!.uid;
           final displayName = userCredential.user!.displayName;
+          final status = 'online';
+           final photoURL = userCredential.user!.photoURL; 
 
           // Store user data in Firestore
-          _fireStore
-              .collection('users')
-              .doc(uid)
-              .set({'uid': uid, 'email': email, 'displayName': displayName});
+          _fireStore.collection('users').doc(uid).set({
+            'uid': uid,
+            'email': email,
+            'displayName': displayName,
+            'status': status,
+            'profilePhoto': photoURL
+            
+          });
           print(displayName);
 
           return userCredential.user;

@@ -2,8 +2,12 @@ import 'package:boardingadmissions/components/appbar_with_backbtn.dart';
 import 'package:boardingadmissions/components/chatbubble.dart';
 import 'package:boardingadmissions/services/chat/chat_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
+
 
 class ChatPage extends StatefulWidget {
   const ChatPage({
@@ -13,6 +17,7 @@ class ChatPage extends StatefulWidget {
   });
   final String receiverUserEmail;
   final String receiverUserId;
+ 
 
   @override
   State<ChatPage> createState() => _ChatPageState();

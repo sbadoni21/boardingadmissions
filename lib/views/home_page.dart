@@ -9,6 +9,7 @@ import 'package:boardingadmissions/views/chatapp.dart';
 import 'package:boardingadmissions/views/chatpage.dart';
 import 'package:boardingadmissions/views/profile_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -29,11 +30,34 @@ class HomePage extends StatefulWidget {
   HomePageState createState() => HomePageState();
 }
 
-class HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> with WidgetsBindingObserver {
   int _currentIndex = 0;
   bool isLoading = true;
   final PageController _pageController = PageController(initialPage: 0);
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  void setStatus(String status) async {
+    await _firestore
+        .collection('users')
+        .doc(_firebaseAuth.currentUser!.uid)
+        .update({'status': status});
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      setStatus('Online');
+    } else {
+      setStatus('Offline');
+    }
+  }
 
   @override
   void dispose() {

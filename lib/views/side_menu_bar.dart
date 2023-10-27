@@ -32,8 +32,7 @@ class _MenuScreenState extends State<MenuScreen> {
       if (doc.exists) {
         final userData = doc.data() as Map<String, dynamic>;
         setState(() {
-          displayName = userData[
-              'displayName']; 
+          displayName = userData['displayName'];
           // Adjust the field name as per your database structure
         });
       }
@@ -83,7 +82,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               color: Colors.blue,
                             ),
                             child: Center(
-                              child: Image.asset("assets/photos/image8.png"),
+                              child: Image.asset("assets/photos/image9.png"),
                             ),
                           ),
                         ),
@@ -94,21 +93,23 @@ class _MenuScreenState extends State<MenuScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "HI",
+                                  "Hi",
                                   style: TextStyle(
                                       color: Colors.blue,
                                       fontSize: 32,
                                       fontWeight: FontWeight.w700),
                                 ),
-                               Text(
-  displayName as String,
-  style: TextStyle(
-    color: const Color.fromARGB(255, 15, 33, 47),
-    fontSize: 28,
-    fontWeight: FontWeight.w700,
-  ),
-),
-
+                                Text(
+                                  displayName != null
+                                      ? displayName as String
+                                      : "Username",
+                                  style: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 15, 33, 47),
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
                                 Text(
                                   _firebaseAuth.currentUser!.email as String,
                                   style: TextStyle(
@@ -136,9 +137,9 @@ class _MenuScreenState extends State<MenuScreen> {
                                 AuthenticationServices();
                             await authService.signOut();
                             Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-        builder: (context) => LoginPage()));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
                           } else {
                             Navigator.push(
                                 context,

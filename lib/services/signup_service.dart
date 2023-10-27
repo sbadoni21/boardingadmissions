@@ -23,7 +23,7 @@ class signup_service {
         await _fireStore
           .collection('users')
           .doc(userCredential.user!.uid)
-          .set({'uid': userCredential.user!.uid, 'email':email, 'username':name},SetOptions(merge: true));
+          .set({'uid': userCredential.user!.uid, 'email':email, 'displayName':name, 'status': 'Online'},SetOptions(merge: true));
 
         // User registration successful, you can navigate to a new page or perform other actions.
       }

@@ -13,6 +13,7 @@ class ChatApp extends StatefulWidget {
 
 class _ChatAppState extends State<ChatApp> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,32 @@ class _ChatAppState extends State<ChatApp> {
 
     if (_auth.currentUser!.email != data['email']) {
       return ListTile(
-        title: Text(data['email']),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: data['photoURL'] != null
+                      ? data['photoURL']
+                      : AssetImage(
+                          'assets/photos/image9.png'), // Use the user's profile image URL or a placeholder image
+                  radius: 20, // Adjust the size as needed
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  data['displayName'],
+                ),
+              ],
+            ),
+            Icon(
+              Icons.messenger_outline,
+              color: data['status'] == 'Online' ? Colors.green : Colors.red,
+            )
+          ],
+        ),
         onTap: () {
           Navigator.push(
               context,
