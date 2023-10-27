@@ -17,11 +17,6 @@ class AuthenticationServices {
         email: email,
         password: password,
       );
-
-      _fireStore
-          .collection('users')
-          .doc(userCredential.user!.uid)
-          .set({'uid': userCredential.user!.uid, 'email': email});
       return userCredential.user;
     } catch (e) {
       print("Error during sign-in: $e");
@@ -86,8 +81,8 @@ class AuthenticationServices {
           final email = userCredential.user!.providerData[0].email;
           final uid = userCredential.user!.uid;
           final displayName = userCredential.user!.displayName;
-          final status = 'online';
-           final photoURL = userCredential.user!.photoURL; 
+          final status = 'Online';
+          final photoURL = userCredential.user!.photoURL; 
 
           // Store user data in Firestore
           _fireStore.collection('users').doc(uid).set({
