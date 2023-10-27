@@ -1,10 +1,8 @@
-// import 'package:boardingadmissions/services/notification/notification_service.dart';
 import 'package:boardingadmissions/services/authentication_service.dart';
-import 'package:boardingadmissions/views/chatapp.dart';
+import 'package:boardingadmissions/services/notification/notification_service.dart';
 import 'package:boardingadmissions/views/home_page.dart';
-import 'package:boardingadmissions/views/login_page.dart';
-import 'package:boardingadmissions/views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
@@ -27,14 +25,25 @@ Future<void> main() async {
     );
     logger.i("Firebase initialized successfully");
     runApp(MyApp());
-    // NotificationService().initialize();
-
-    logger.i("connected");
-    runApp(const MyApp());
-
+    NotificationService().initialize();
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   } catch (e) {
     logger.e(e);
   }
+}
+
+@pragma("vm:entry-point")
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(
+    apiKey: "AIzaSyAVWrB9v-jqhkurev2Bbqf8bRyskX1djWY",
+    appId: "1:231034076515:android:1c99224cdd38922cc56756",
+    messagingSenderId: "231034076515",
+    projectId: "boarding-admissions",
+  ));
+
+  print(message.notification!.title.toString());
+  print(message.notification!.body.toString());
 }
 
 class MyApp extends StatefulWidget {
@@ -61,10 +70,9 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      navigatorKey:
-          navigatorKey,
-          home: HomePage(),
-           
+      navigatorKey: navigatorKey,
+      home: HomePage(),
+
       // home: StreamBuilder(
       //   stream: authServices.firebaseAuth.authStateChanges(),
       //   builder: (BuildContext context, AsyncSnapshot snapshot) {
