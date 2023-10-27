@@ -1,3 +1,4 @@
+import 'package:boardingadmissions/components/appbar_with_backbtn.dart';
 import 'package:flutter/material.dart' hide VoidCallback;
 import 'package:flutter/widgets.dart' show VoidCallback;
 
@@ -30,6 +31,7 @@ class ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CustomAppBarWithBackButton(),
         body: ListView(
           children: [
             Column(

@@ -1,3 +1,4 @@
+import 'package:boardingadmissions/views/notification.dart';
 import 'package:boardingadmissions/views/side_menu_bar.dart';
 import 'package:boardingadmissions/views/search_page.dart';
 
@@ -44,6 +45,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Row(
                 children: [
                   IconButton(
+                    icon: Icon(
+                      Icons.notifications_active_outlined,
+                      size: 30,
+                      color: Color.fromRGBO(2, 84, 152, 1),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationPage()));
+                      // Handle notifications icon press
+                    },
+                  ),
+                  IconButton(
                     icon: const Icon(
                       Icons.search,
                       size: 30,
@@ -53,7 +68,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  SearchBarButton()));
+                              builder: (context) => SearchBarButton()));
                       // Handle notifications icon press
                     },
                   ),

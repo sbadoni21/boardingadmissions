@@ -63,31 +63,31 @@ class _MyAppState extends State<MyApp> {
       ),
       navigatorKey:
           navigatorKey,
-          // home: ChatApp(),
+          home: HomePage(),
            
-      home: StreamBuilder(
-        stream: authServices.firebaseAuth.authStateChanges(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const SplashScreen();
-          }
+      // home: StreamBuilder(
+      //   stream: authServices.firebaseAuth.authStateChanges(),
+      //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.waiting) {
+      //       return const SplashScreen();
+      //     }
 
-          if (snapshot.hasError) {
-            print("Error with the stream: ${snapshot.error}");
-            return const Center(child: Text("An error occurred."));
-          }
+      //     if (snapshot.hasError) {
+      //       print("Error with the stream: ${snapshot.error}");
+      //       return const Center(child: Text("An error occurred."));
+      //     }
 
-          if (snapshot.hasData && snapshot.data != null) {
-            print("User is authenticated. Navigating to HomePage.");
-            return HomePage();
-          }
+      //     if (snapshot.hasData && snapshot.data != null) {
+      //       print("User is authenticated. Navigating to HomePage.");
+      //       return HomePage();
+      //     }
 
-          print("User is not authenticated. Navigating to LoginPage.");
+      //     print("User is not authenticated. Navigating to LoginPage.");
 
-          return  LoginPage();
+      //     return  LoginPage();
 
-        },
-      ),
+      //   },
+      // ),
     );
   }
 }

@@ -1,15 +1,14 @@
-
 import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/components/dreamschool_component.dart';
 import 'package:boardingadmissions/components/sample_classes.dart';
 import 'package:boardingadmissions/views/chat.dart';
 import 'package:boardingadmissions/views/chatapp.dart';
 import 'package:boardingadmissions/views/profile_page.dart';
+import 'package:boardingadmissions/views/schools_bottomNav.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 class FaqItem {
   final String question;
@@ -116,19 +115,13 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
   Widget homeScreenPage() {
     return SafeArea(
       child: Scaffold(
-        appBar:  CustomAppBar(),
-        body: IndexedStack(
-          index: _currentIndex,
-          children: [
-            buildHomePage(),
-             ProfilePage(),
-             ChatApp(),
-            Chat(), // Replace with your SettingsScreen
-            ProfilePage(),
-             ChatApp(),
-           Chat(), // Replace with your SettingsScreen
-          ],
-        ),
+        appBar: CustomAppBar(),
+        body: IndexedStack(index: _currentIndex, children: [
+          buildHomePage(),
+          ProfilePage(),
+          Schools(),
+          ChatApp(),
+        ]),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.blue,
@@ -214,9 +207,9 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 ),
                 child: Column(
                   children: [
-                    Icon(Icons.notifications,
+                    Icon(Icons.school_rounded,
                         color: _currentIndex == 2 ? Colors.blue : Colors.grey),
-                    Text("Notifications",
+                    Text("Schools",
                         style: TextStyle(
                             color:
                                 _currentIndex == 2 ? Colors.blue : Colors.grey))
