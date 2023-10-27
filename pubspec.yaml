@@ -53,10 +53,13 @@ dependencies:
   image_picker: ^1.0.4
   path_provider: ^2.1.1
   random_string: ^2.1.0
+  firebase_messaging: ^14.7.2
   rive: ^0.11.17
   strings: ^2.0.3
   syncfusion_flutter_pdfviewer: ^23.1.41
   video_player: ^2.7.2
+  flutter_local_notifications: ^16.1.0
+  app_settings: ^5.1.1
 
 dev_dependencies:
   flutter_lints: ^3.0.0

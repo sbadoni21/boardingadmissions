@@ -118,7 +118,7 @@ class LoginPageState extends State<LoginPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const ResetPasswordPage(),
+                                    builder: (context) => ResetPasswordPage(),
                                   ),
                                 );
                               },
@@ -244,7 +244,7 @@ class LoginPageState extends State<LoginPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SignUpPage(),
+                              builder: (context) => SignUpPage(),
                             ),
                           );
                           // Your button click logic here

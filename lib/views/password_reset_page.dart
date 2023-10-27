@@ -30,8 +30,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                const String email =
-                    ""; // Get the user's email from where you've stored it (e.g., in a variable, TextEditingController, etc.)
+                String email =""; // Get the user's email from where you've stored it (e.g., in a variable, TextEditingController, etc.)
                 final String newPassword = newPasswordController.text;
 
                 if (newPassword.isEmpty) {

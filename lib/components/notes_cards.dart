@@ -52,7 +52,7 @@ class NoteCard extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const PDFViewerPage()));
+                    MaterialPageRoute(builder: (context) =>  PDFViewerPage()));
               },
               child: Container(
                 constraints: BoxConstraints.tight(Size.infinite),

@@ -58,7 +58,7 @@ class CustomAppBarWithBackButton extends StatelessWidget implements PreferredSiz
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SearchBarButton()));
+                              builder: (context) =>  SearchBarButton()));
                       // Handle notifications icon press
                     },
                   ),
@@ -72,7 +72,7 @@ class CustomAppBarWithBackButton extends StatelessWidget implements PreferredSiz
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MenuScreen()));
+                              builder: (context) =>  MenuScreen()));
                       // Handle notifications icon press
                     },
                   ),

@@ -27,7 +27,7 @@ class SchoolList extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SchoolDetailPage()));
+                                builder: (context) => SchoolDetailPage()));
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
