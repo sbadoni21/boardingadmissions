@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:boardingadmissions/components/chat_nav_bar_component.dart';
 import 'package:boardingadmissions/components/chatbubble.dart';
 import 'package:boardingadmissions/services/chat/chat_services.dart';
@@ -10,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:boardingadmissions/views/image_fullscreen_page.dart';
 import 'dart:io';
+import 'package:permission_handler/permission_handler.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({
@@ -34,6 +37,8 @@ class _ChatPageState extends State<ChatPage> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   File? imageFile;
+  ImagePicker _picker = ImagePicker();
+  bool isImagePickerActive = false;
 
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
@@ -44,23 +49,40 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future getImage() async {
-    ImagePicker _picker = ImagePicker();
-    await _picker.pickImage(source: ImageSource.gallery).then((XFile) {
-      if (XFile != null) {
-        imageFile = File(XFile.path);
+    if (!isImagePickerActive) {
+      isImagePickerActive = true;
+      final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+      isImagePickerActive = false;
+      if (pickedImage != null) {
+        imageFile = File(pickedImage.path);
         uploadImage();
       }
-    });
+    }
   }
 
   Future getImageFromCamera() async {
-    ImagePicker _picker = ImagePicker();
-    await _picker.pickImage(source: ImageSource.camera).then((XFile) {
-      if (XFile != null) {
-        imageFile = File(XFile.path);
+    if (!isImagePickerActive) {
+      isImagePickerActive = true;
+      final XFile? pickedImage = await _picker.pickImage(source: ImageSource.camera);
+      isImagePickerActive = false;
+      if (pickedImage != null) {
+        imageFile = File(pickedImage.path);
         uploadImage();
       }
-    });
+    }
+  }
+
+  Future requestCameraPermission() async {
+   final permissions = <Permission>[
+    Permission.camera,
+    Permission.storage,
+  ];
+   Map<Permission, PermissionStatus> statuses = await permissions.request();
+   if (statuses[Permission.camera]!.isGranted && statuses[Permission.storage]!.isGranted) {
+      getImageFromCamera();
+    } else {
+      return;
+    }
   }
 
   Future uploadImage() async {
@@ -113,19 +135,19 @@ class _ChatPageState extends State<ChatPage> {
                       Icons.arrow_back,
                       color: Colors.blue,
                     )),
-                Container(
-                  width: 150,
-                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: CircleAvatar(
-                    backgroundImage: widget.receiverProfilePhoto != null
-                        ? NetworkImage(widget.receiverProfilePhoto!)
-                            as ImageProvider // Cast to ImageProvider
-                        : AssetImage(
-                            'assets/placeholder_image.png'), // Use a placeholder image
-                    radius: 20,
-                    // Adjust the size as needed
-                  ),
-                ),
+                // Container(
+                //   width: 150,
+                //   padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                //   child: CircleAvatar(
+                //     backgroundImage: widget.receiverProfilePhoto != null
+                //         ? NetworkImage(widget.receiverProfilePhoto!)
+                //             as ImageProvider // Cast to ImageProvider
+                //         : AssetImage(
+                //             'assets/image6.png'), // Use a placeholder image
+                //     radius: 20,
+                //     // Adjust the size as needed
+                //   ),
+                // ),
                 SizedBox(width: 20),
                 Text(
                   widget.receiverDisplayName != null
@@ -184,7 +206,7 @@ class _ChatPageState extends State<ChatPage> {
               child: TextField(
                 decoration: InputDecoration(
                     suffixIcon: IconButton(
-                        onPressed: () => getImageFromCamera(),
+                        onPressed: () => requestCameraPermission(),
                         icon: Icon(Icons.photo_camera))),
                 controller: _messageController,
                 obscureText: false,

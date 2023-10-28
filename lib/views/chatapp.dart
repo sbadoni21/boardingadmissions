@@ -57,7 +57,7 @@ class _ChatAppState extends State<ChatApp> {
                       ? NetworkImage(data['profilePhoto'])
                           as ImageProvider // Cast to ImageProvider
                       : AssetImage(
-                          'assets/placeholder_image.png'), // Use a placeholder image
+                          'assets/image9.png'), // Use a placeholder image
                   radius: 20, // Adjust the size as needed
                 ),
                 SizedBox(
