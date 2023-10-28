@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
+import 'package:boardingadmissions/views/image_fullscreen_page.dart';
 import 'dart:io';
 
 class ChatPage extends StatefulWidget {
@@ -52,6 +53,16 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
+  Future getImageFromCamera() async {
+    ImagePicker _picker = ImagePicker();
+    await _picker.pickImage(source: ImageSource.camera).then((XFile) {
+      if (XFile != null) {
+        imageFile = File(XFile.path);
+        uploadImage();
+      }
+    });
+  }
+
   Future uploadImage() async {
     String fileName = Uuid().v1();
 
@@ -64,7 +75,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future sendImage(String imageUrl) async {
-    _chatService.sendMessage(widget.receiverUserId, imageUrl, 'Image');
+    await _chatService.sendMessage(widget.receiverUserId, imageUrl, 'Image');
   }
 
   String? displayName;
@@ -163,6 +174,23 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
           ),
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.all(10), // Adjust margin as needed
+              decoration: BoxDecoration(
+                color: Colors.white, // Set background color
+                borderRadius: BorderRadius.circular(10), // Add rounded corners
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                        onPressed: () => getImageFromCamera(),
+                        icon: Icon(Icons.photo_camera))),
+                controller: _messageController,
+                obscureText: false,
+              ),
+            ),
+          ),
           IconButton(
             onPressed: sendMessage,
             icon: const Icon(
@@ -224,7 +252,16 @@ class _ChatPageState extends State<ChatPage> {
                     : MainAxisAlignment.start,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ImageEnlargedView(imageUrl: data['message']),
+                    ),
+                  );
+                  print(data['message']);
+                },
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(

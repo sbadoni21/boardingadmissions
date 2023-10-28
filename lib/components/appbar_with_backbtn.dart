@@ -33,7 +33,7 @@ class CustomAppBarWithBackButton extends StatelessWidget implements PreferredSiz
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePage()))
+           Navigator.pop(context)
           ;}, 
           icon: const Icon(Icons.arrow_back, color: Colors.blue,)),
             Container(
