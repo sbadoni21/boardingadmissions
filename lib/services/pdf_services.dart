@@ -16,7 +16,7 @@ Future<void> get1() async {
 
 Future uploadPDF(String pdfPath, String fileName) async {
   get1();
-  final Reference storageRef = FirebaseStorage.instance.ref().child(fileName);
+  final Reference storageRef = FirebaseStorage.instance.ref().child('pdf').child('$fileName.pdf');
 
   if (kIsWeb) {
     // For web

@@ -1,6 +1,8 @@
 import 'package:boardingadmissions/services/authentication_service.dart';
 import 'package:boardingadmissions/services/notification/notification_service.dart';
 import 'package:boardingadmissions/views/home_page.dart';
+import 'package:boardingadmissions/views/login_page.dart';
+import 'package:boardingadmissions/views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +27,8 @@ Future<void> main() async {
     );
     logger.i("Firebase initialized successfully");
     runApp(MyApp());
-    NotificationService().initialize();
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    // NotificationService().initialize();
+    // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   } catch (e) {
     logger.e(e);
   }
@@ -71,31 +73,30 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       navigatorKey: navigatorKey,
-      home: HomePage(),
+      // home: HomePage(),
 
-      // home: StreamBuilder(
-      //   stream: authServices.firebaseAuth.authStateChanges(),
-      //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.waiting) {
-      //       return const SplashScreen();
-      //     }
+      home: StreamBuilder(
+        stream: authServices.firebaseAuth.authStateChanges(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const SplashScreen();
+          }
 
-      //     if (snapshot.hasError) {
-      //       print("Error with the stream: ${snapshot.error}");
-      //       return const Center(child: Text("An error occurred."));
-      //     }
+          if (snapshot.hasError) {
+            print("Error with the stream: ${snapshot.error}");
+            return const Center(child: Text("An error occurred."));
+          }
 
-      //     if (snapshot.hasData && snapshot.data != null) {
-      //       print("User is authenticated. Navigating to HomePage.");
-      //       return HomePage();
-      //     }
+          if (snapshot.hasData && snapshot.data != null) {
+            print("User is authenticated. Navigating to HomePage.");
+            return HomePage();
+          }
 
-      //     print("User is not authenticated. Navigating to LoginPage.");
+          print("User is not authenticated. Navigating to LoginPage.");
 
-      //     return  LoginPage();
-
-      //   },
-      // ),
+          return LoginPage();
+        },
+      ),
     );
   }
 }

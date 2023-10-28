@@ -1,4 +1,3 @@
-import 'package:boardingadmissions/components/appbar_with_backbtn.dart';
 import 'package:boardingadmissions/views/chatpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,13 +12,16 @@ class ChatApp extends StatefulWidget {
 
 class _ChatAppState extends State<ChatApp> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildUserList(),
-    );
+        body:
+
+            // _buildchatSearchBar(),
+            _buildUserList());
+    //   ],
+    // ),
   }
 
   Widget _buildUserList() {
@@ -52,14 +54,14 @@ class _ChatAppState extends State<ChatApp> {
               children: [
                 CircleAvatar(
                   backgroundImage: data['profilePhoto'] != null
-                      ? NetworkImage('profilePhoto')
+                      ? NetworkImage(data['profilePhoto'])
                           as ImageProvider // Cast to ImageProvider
                       : AssetImage(
                           'assets/placeholder_image.png'), // Use a placeholder image
                   radius: 20, // Adjust the size as needed
                 ),
                 SizedBox(
-                  width: 5,
+                  width: 8,
                 ),
                 Text(
                   data['displayName'],
@@ -77,6 +79,8 @@ class _ChatAppState extends State<ChatApp> {
               context,
               MaterialPageRoute(
                   builder: (context) => ChatPage(
+                        receiverProfilePhoto: (data['profilePhoto']) as String,
+                        receiverDisplayName: (data['displayName']) as String,
                         receiverUserEmail: (data['email']) as String,
                         receiverUserId: (data['uid']) as String,
                       )));
