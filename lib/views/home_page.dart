@@ -253,6 +253,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
       ),
     );
   }
+
   Widget buildHomePage() {
     return SizedBox(
       child: ListView(
@@ -416,15 +417,6 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget buildNotificationScreen() {
-    return const Center(
-      child: Text(
-        'Notification Screen',
-        style: TextStyle(fontSize: 24),
       ),
     );
   }

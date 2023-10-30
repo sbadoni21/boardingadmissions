@@ -1,4 +1,3 @@
-
 import 'package:boardingadmissions/views/pdfView_page.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +31,7 @@ class NoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-       width: 150, // Adjust the width of each item
+      width: 150, // Adjust the width of each item
       margin: const EdgeInsets.symmetric(horizontal: 10), // Add spacing
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.elliptical(10, 10)),
@@ -50,10 +49,10 @@ class NoteCard extends StatelessWidget {
                       10), // Adjust the border radius as needed
                 ),
               ),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) =>  PDFViewerPage()));
-              },
+              onPressed: () {},
+              //   Navigator.push(context,
+              //       MaterialPageRoute(builder: (context) =>  PDFViewerPage()));
+              // },
               child: Container(
                 constraints: BoxConstraints.tight(Size.infinite),
                 decoration: BoxDecoration(
@@ -64,8 +63,7 @@ class NoteCard extends StatelessWidget {
                     ], // Define your gradient colors
                     begin: Alignment
                         .bottomCenter, // Adjust the start point as needed
-                    end:
-                        Alignment.topCenter, // Adjust the end point as needed
+                    end: Alignment.topCenter, // Adjust the end point as needed
                   ),
                   borderRadius: BorderRadius.circular(
                       10), // Match the button's border radius

@@ -156,7 +156,7 @@ class NotificationService {
     print(message.data);
     print(message.data['type'] == "Chat");
     if (message.data['type'] == "Chat") {
-      Navigator.of(context).pushNamed('ChatApp()');
+      Navigator.of(context).pop(ChatApp());
     }
   }
 }

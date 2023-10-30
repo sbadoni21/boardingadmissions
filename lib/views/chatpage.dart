@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:boardingadmissions/components/chatbubble.dart';
+
 import 'package:boardingadmissions/services/chat/chat_services.dart';
+import 'package:boardingadmissions/services/pdf_services.dart';
 import 'package:boardingadmissions/views/image_fullscreen_page.dart';
+import 'package:boardingadmissions/views/pdfView_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,7 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage(
@@ -21,7 +26,7 @@ class ChatPage extends StatefulWidget {
       required this.receiverUserId,
       required this.receiverUserEmail,
       required this.status,
-       required this.receiverDeviceToken});
+      required this.receiverDeviceToken});
   final String receiverUserEmail;
   final String receiverUserId;
   final String receiverProfilePhoto;
@@ -94,10 +99,8 @@ class _ChatPageState extends State<ChatPage> {
 
   Future uploadImage() async {
     String fileName = Uuid().v1();
-
     var ref =
         FirebaseStorage.instance.ref().child('images').child('$fileName.jpg');
-
     var uploadTask = await ref.putFile(imageFile!);
     String ImageUrl = await uploadTask.ref.getDownloadURL();
     sendImage(ImageUrl);
@@ -169,7 +172,7 @@ class _ChatPageState extends State<ChatPage> {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
@@ -221,7 +224,16 @@ class _ChatPageState extends State<ChatPage> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10))),
-                
+                  prefixIcon: IconButton(
+                    onPressed: () {
+                      SendPDF(_chatService, widget);
+                    },
+                    icon: Icon(
+                      Icons.attach_file,
+                      color: Colors.blueAccent,
+                    ),
+                  ),
+
                   hintStyle:
                       TextStyle(color: Colors.black), // Set text color to black
                 ),
@@ -250,8 +262,14 @@ class _ChatPageState extends State<ChatPage> {
                     color: Colors.blueAccent,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(50), // Define the border radius
+                    color: Colors.blue, // Set the background color
+                  ),
                   child: IconButton(
                     onPressed: () async {
                       sendMessage();
@@ -277,9 +295,8 @@ class _ChatPageState extends State<ChatPage> {
                           });
                     },
                     icon: const Icon(
-                      Icons.arrow_circle_right_rounded,
-                      size: 40,
-                      color: Colors.blueAccent,
+                      Icons.send_sharp,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -311,19 +328,15 @@ class _ChatPageState extends State<ChatPage> {
                     ? MainAxisAlignment.end
                     : MainAxisAlignment.start,
             children: [
-              Text(
-                data['senderEmail'],
-                style: const TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-          ChatBubble(message: data['message'], seen: data['seen'])
+              ChatBubble(
+                  message: data['message'],
+                  seen: data['seen'],
+                  timestamp: data['timestamp']),
             ],
           ),
         ),
       );
-    } else {
+    } else if (data['type'] == 'Image') {
       return Container(
         alignment: alignment,
         // Expand horizontally
@@ -365,10 +378,46 @@ class _ChatPageState extends State<ChatPage> {
           ),
         ),
       );
+    } else if (data['type'] == 'pdf') {
+      return Container(
+        alignment: alignment,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment:
+                (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
+            mainAxisAlignment:
+                (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.start,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          SfPdfViewer.network(data['message']),
+                    ),
+                  );
+                },
+                child: Text("pdf"),
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return SnackBar(content: Text('ERROR'));
     }
   }
 
   Widget _buildMessageList() {
+    List<Map<String, dynamic>> messages = [];
+    DateTime? currentDate;
+
     return StreamBuilder<QuerySnapshot>(
       stream: _chatService.getMessages(
         _firebaseAuth.currentUser!.uid,
@@ -380,14 +429,59 @@ class _ChatPageState extends State<ChatPage> {
         } else if (snapshot.hasError) {
           return const Text('Error');
         } else {
-          return ListView(
-            children: snapshot.data!.docs
-                .map((doc) =>
-                    _buildMessageItem(doc.data() as Map<String, dynamic>))
-                .toList(),
+          for (var doc in snapshot.data!.docs) {
+            Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+            DateTime? messageDate = (data['timestamp'] as Timestamp?)?.toDate();
+
+            if (messageDate != null) {
+              if (currentDate == null || !isSameDay(currentDate, messageDate)) {
+                messages.add({'isDivider': true, 'date': messageDate});
+                currentDate = messageDate;
+              }
+
+              messages.add({'isDivider': false, 'message': data});
+            }
+          }
+
+          return ListView.builder(
+            itemCount: messages.length,
+            itemBuilder: (context, index) {
+              if (messages[index]['isDivider']) {
+                // Display the date divider
+                DateTime date = messages[index]['date'];
+                String formattedDate =
+                    DateFormat.yMMMd().format(date); // Format the date
+                return Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(2, 84, 152, 1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.all(4),
+                    child: Text(
+                      formattedDate,
+                      style: TextStyle(color: Colors.white, fontSize: 10),
+                    ),
+                  ),
+                );
+              } else {
+                // Display the message
+                return _buildMessageItem(messages[index]['message']);
+              }
+            },
           );
         }
       },
     );
+  }
+
+  bool isSameDay(DateTime? date1, DateTime? date2) {
+    if (date1 == null || date2 == null) {
+      return false; // Consider them not the same day if either is null
+    }
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
   }
 }

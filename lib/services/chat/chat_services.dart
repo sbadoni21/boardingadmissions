@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class ChatService extends ChangeNotifier {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+     final Timestamp timestamp = Timestamp.now();
+     
 
   // Sending messages
   Future<void> sendMessage(
