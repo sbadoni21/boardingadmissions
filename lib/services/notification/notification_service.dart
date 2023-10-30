@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:boardingadmissions/views/chatapp.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -156,7 +155,7 @@ class NotificationService {
     print(message.data);
     print(message.data['type'] == "Chat");
     if (message.data['type'] == "Chat") {
-      Navigator.of(context).pushNamed('ChatApp()');
+      Navigator.of(context).pushNamed('/ChatApp');
     }
   }
 }
