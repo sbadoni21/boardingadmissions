@@ -1,14 +1,14 @@
 import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/components/dreamschool_component.dart';
 import 'package:boardingadmissions/components/sample_classes.dart';
-import 'package:boardingadmissions/views/chat.dart';
+import 'package:boardingadmissions/services/notification/notification_service.dart';
 import 'package:boardingadmissions/views/chatapp.dart';
 import 'package:boardingadmissions/views/profile_page.dart';
 import 'package:boardingadmissions/views/schools_bottomNav.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class FaqItem {
   final String question;
@@ -40,6 +40,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    // NotificationService().initialize(context);
   }
 
   void setStatus(String status) async {
@@ -252,7 +253,6 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
       ),
     );
   }
-
   Widget buildHomePage() {
     return SizedBox(
       child: ListView(

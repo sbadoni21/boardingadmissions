@@ -4,7 +4,12 @@ import 'package:boardingadmissions/views/search_page.dart';
 import 'package:flutter/material.dart';
 
 List<Map<String, dynamic>> sideMenuItems = [
-  {"icon": Icons.home, "text": "Home", "key": "home", 'route': const HomePage()},
+  {
+    "icon": Icons.home,
+    "text": "Home",
+    "key": "home",
+    'route': const HomePage()
+  },
   {
     "icon": Icons.search,
     "text": "Search",
@@ -18,13 +23,11 @@ List<Map<String, dynamic>> sideMenuItems = [
     "key": "settings",
     'route': () {}
   },
-  {"icon": Icons.chat, "text": "Chat", "key": "chat", 'route':Chat()},
+  {"icon": Icons.assistant, "text": "Enquiry", "key": "chat", 'route': Chat()},
   {
     "icon": Icons.logout,
     "text": "Logout",
     "key": "logout",
-    "route": () async {
-      
-    }
+    "route": () async {}
   }
 ];

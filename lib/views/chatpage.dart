@@ -1,31 +1,33 @@
-import 'dart:math';
+import 'dart:convert';
+import 'dart:io';
 
-import 'package:boardingadmissions/components/chat_nav_bar_component.dart';
 import 'package:boardingadmissions/components/chatbubble.dart';
 import 'package:boardingadmissions/services/chat/chat_services.dart';
-import 'package:boardingadmissions/views/chatapp.dart';
+import 'package:boardingadmissions/views/image_fullscreen_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:uuid/uuid.dart';
-import 'package:boardingadmissions/views/image_fullscreen_page.dart';
-import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:uuid/uuid.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({
-    super.key,
-    required this.receiverProfilePhoto,
-    required this.receiverDisplayName,
-    required this.receiverUserId,
-    required this.receiverUserEmail,
-  });
+  const ChatPage(
+      {super.key,
+      required this.receiverProfilePhoto,
+      required this.receiverDisplayName,
+      required this.receiverUserId,
+      required this.receiverUserEmail,
+      required this.status,
+       required this.receiverDeviceToken});
   final String receiverUserEmail;
   final String receiverUserId;
   final String receiverProfilePhoto;
   final String receiverDisplayName;
+  final String status;
+  final String receiverDeviceToken;
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -49,9 +51,11 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future getImage() async {
+    final ImagePicker _picker = ImagePicker();
     if (!isImagePickerActive) {
       isImagePickerActive = true;
-      final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+      final XFile? pickedImage =
+          await _picker.pickImage(source: ImageSource.gallery);
       isImagePickerActive = false;
       if (pickedImage != null) {
         imageFile = File(pickedImage.path);
@@ -61,9 +65,11 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future getImageFromCamera() async {
+    final ImagePicker _picker = ImagePicker();
     if (!isImagePickerActive) {
       isImagePickerActive = true;
-      final XFile? pickedImage = await _picker.pickImage(source: ImageSource.camera);
+      final XFile? pickedImage =
+          await _picker.pickImage(source: ImageSource.camera);
       isImagePickerActive = false;
       if (pickedImage != null) {
         imageFile = File(pickedImage.path);
@@ -73,12 +79,13 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future requestCameraPermission() async {
-   final permissions = <Permission>[
-    Permission.camera,
-    Permission.storage,
-  ];
-   Map<Permission, PermissionStatus> statuses = await permissions.request();
-   if (statuses[Permission.camera]!.isGranted && statuses[Permission.storage]!.isGranted) {
+    final permissions = <Permission>[
+      Permission.camera,
+      Permission.storage,
+    ];
+    Map<Permission, PermissionStatus> statuses = await permissions.request();
+    if (statuses[Permission.camera]!.isGranted &&
+        statuses[Permission.storage]!.isGranted) {
       getImageFromCamera();
     } else {
       return;
@@ -129,35 +136,52 @@ class _ChatPageState extends State<ChatPage> {
                 IconButton(
                     onPressed: () {
                       Navigator.of(context).pop();
-                      ;
                     },
                     icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.blue,
                     )),
-                // Container(
-                //   width: 150,
-                //   padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                //   child: CircleAvatar(
-                //     backgroundImage: widget.receiverProfilePhoto != null
-                //         ? NetworkImage(widget.receiverProfilePhoto!)
-                //             as ImageProvider // Cast to ImageProvider
-                //         : AssetImage(
-                //             'assets/image6.png'), // Use a placeholder image
-                //     radius: 20,
-                //     // Adjust the size as needed
-                //   ),
-                // ),
-                SizedBox(width: 20),
-                Text(
-                  widget.receiverDisplayName != null
-                      ? widget.receiverDisplayName as String
-                      : "Username",
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 15, 33, 47),
-                    fontSize: 28,
-                    fontWeight: FontWeight.w700,
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: Center(
+                    child: CircleAvatar(
+                      backgroundImage: widget.receiverProfilePhoto != null
+                          ? NetworkImage(widget.receiverProfilePhoto!)
+                              as ImageProvider // Cast to ImageProvider
+                          : AssetImage(
+                              'assets/image6.png'), // Use a placeholder image
+                      radius: 20,
+                      // Adjust the size as needed
+                    ),
                   ),
+                ),
+                SizedBox(width: 5),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      widget.receiverDisplayName != null
+                          ? widget.receiverDisplayName as String
+                          : "Username",
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 15, 33, 47),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      widget.status == 'Online' ? 'Online' : "Offline",
+                      textAlign: TextAlign.end,
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 15, 33, 47),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -179,45 +203,87 @@ class _ChatPageState extends State<ChatPage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
+              child: Container(
+            // Adjust margin as needed
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), // Add rounded corners
+            ),
             child: Container(
-              margin: const EdgeInsets.all(10), // Adjust margin as needed
               decoration: BoxDecoration(
-                color: Colors.white, // Set background color
-                borderRadius: BorderRadius.circular(10), // Add rounded corners
+                borderRadius: BorderRadius.circular(10),
+                // Apply rounded corners
               ),
               child: TextField(
                 decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                        onPressed: () => getImage(), icon: Icon(Icons.photo))),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                
+                  hintStyle:
+                      TextStyle(color: Colors.black), // Set text color to black
+                ),
                 controller: _messageController,
                 obscureText: false,
+                style:
+                    TextStyle(color: Colors.black), // Set text color to black
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.all(10), // Adjust margin as needed
-              decoration: BoxDecoration(
-                color: Colors.white, // Set background color
-                borderRadius: BorderRadius.circular(10), // Add rounded corners
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                        onPressed: () => requestCameraPermission(),
-                        icon: Icon(Icons.photo_camera))),
-                controller: _messageController,
-                obscureText: false,
-              ),
-            ),
-          ),
-          IconButton(
-            onPressed: sendMessage,
-            icon: const Icon(
-              Icons.arrow_upward,
-              size: 40,
+          )),
+          Padding(
+            padding: const EdgeInsets.all(0),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () => getImage(),
+                  icon: Icon(
+                    Icons.photo,
+                    color: Colors.blueAccent,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => requestCameraPermission(),
+                  icon: Icon(
+                    Icons.photo_camera,
+                    color: Colors.blueAccent,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                    onPressed: () async {
+                      sendMessage();
+                      var data = {
+                        'to': widget.receiverDeviceToken,
+                        'priority': 'high',
+                        'notification': {
+                          'title': 'Boarding Admissions',
+                          'body': "New message from " +
+                              _firebaseAuth.currentUser!.displayName.toString(),
+                        },
+                        'data': {
+                          'type': "Chat",
+                        }
+                      };
+                      await http.post(
+                          Uri.parse('https://fcm.googleapis.com/fcm/send'),
+                          body: jsonEncode(data),
+                          headers: {
+                            'Content-Type': 'application/json; charset=UTF-8',
+                            'Authorization':
+                                'key=AAAANcq0PWM:APA91bGcMj1zySNAMfzj-tUSslTU1q5wSYMA967ndBM0Z_j0LoVagvzzk2nv-dwavXOtJ-B-uT4jUmNKfWyi-oV2Q5x9IhODo8wjWBbGx3mLuumEdkK5xEF1qxB8xA4gags2IZP5qKnN'
+                          });
+                    },
+                    icon: const Icon(
+                      Icons.arrow_circle_right_rounded,
+                      size: 40,
+                      color: Colors.blueAccent,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -252,7 +318,7 @@ class _ChatPageState extends State<ChatPage> {
               const SizedBox(
                 height: 2,
               ),
-              ChatBubble(message: data['message'])
+          ChatBubble(message: data['message'], seen: data['seen'])
             ],
           ),
         ),
@@ -282,7 +348,6 @@ class _ChatPageState extends State<ChatPage> {
                           ImageEnlargedView(imageUrl: data['message']),
                     ),
                   );
-                  print(data['message']);
                 },
                 child: Container(
                   padding: const EdgeInsets.all(12),

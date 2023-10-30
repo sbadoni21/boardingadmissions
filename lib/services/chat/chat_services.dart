@@ -15,15 +15,16 @@ class ChatService extends ChangeNotifier {
     final String currentUserEmail = _firebaseAuth.currentUser!.email.toString();
     final Timestamp timestamp = Timestamp.now();
 
-
     // Create a new Message instance
     Message newMessage = Message(
-        senderId: currentUserId,
-        senderEmail: currentUserEmail,
-        receiverId: receiverId,
-        message: message,
-        timestamp: timestamp,
-        type: type);
+      senderId: currentUserId,
+      senderEmail: currentUserEmail,
+      receiverId: receiverId,
+      message: message,
+      timestamp: timestamp,
+      type: type,
+      seen: false,
+    );
 
     List<String> ids = [currentUserId, receiverId];
     ids.sort();
@@ -45,5 +46,22 @@ class ChatService extends ChangeNotifier {
         .collection('messages')
         .orderBy('timestamp', descending: false)
         .snapshots();
+  }
+
+  void markAsSeen(String userId, String otherUserId) async {
+    List<String> ids = [userId, otherUserId];
+    ids.sort();
+    String chatRoomId = ids.join('_');
+    QuerySnapshot snapshot = await _fireStore
+        .collection('chat_room')
+        .doc(chatRoomId)
+        .collection('messages')
+        .orderBy('timestamp', descending: false)
+        .where("seen", isEqualTo: false)
+        .get();
+    await Future.delayed(Duration(seconds: 3));
+    for (QueryDocumentSnapshot doc in snapshot.docs) {
+      doc.reference.update({'seen': true});
+    }
   }
 }

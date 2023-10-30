@@ -94,6 +94,7 @@ flutter:
     - assets/photos/contact.png
     - assets/photos/suggestions.png
     - assets/photos/queries.png
+    - assets/photos/image9.png
   # fonts:
 
   #   - family: RobotoMono

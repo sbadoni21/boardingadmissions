@@ -1,5 +1,4 @@
 import 'package:boardingadmissions/services/authentication_service.dart';
-import 'package:boardingadmissions/services/notification/notification_service.dart';
 import 'package:boardingadmissions/views/home_page.dart';
 import 'package:boardingadmissions/views/login_page.dart';
 import 'package:boardingadmissions/views/splash_screen.dart';
@@ -27,8 +26,6 @@ Future<void> main() async {
     );
     logger.i("Firebase initialized successfully");
     runApp(MyApp());
-    // NotificationService().initialize();
-    // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   } catch (e) {
     logger.e(e);
   }
@@ -57,12 +54,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AuthenticationServices authServices = AuthenticationServices();
-  // final NotificationService notificationService = NotificationService();
 
   @override
   void initState() {
     super.initState();
-    // notificationService.initialize();
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
 
   @override

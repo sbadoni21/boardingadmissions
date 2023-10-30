@@ -1,3 +1,4 @@
+import 'package:boardingadmissions/services/chat/chat_services.dart';
 import 'package:boardingadmissions/views/chatpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -83,7 +84,10 @@ class _ChatAppState extends State<ChatApp> {
                         receiverDisplayName: (data['displayName']) as String,
                         receiverUserEmail: (data['email']) as String,
                         receiverUserId: (data['uid']) as String,
+                        status: (data ['status'] as String),
+                        receiverDeviceToken: (data['deviceToken'] as String),
                       )));
+                      ChatService().markAsSeen(_auth.currentUser!.uid, data['uid']);
         },
       );
     } else {

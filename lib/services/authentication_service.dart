@@ -1,4 +1,4 @@
-
+import 'package:boardingadmissions/services/notification/notification_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart'; // Import the email_validator package
 import 'package:firebase_auth/firebase_auth.dart';
@@ -78,22 +78,23 @@ class AuthenticationServices {
             await firebaseAuth.signInWithCredential(credential);
 
         if (userCredential.user != null) {
+          final deviceToken = await NotificationService().getDeviceToken();
           final email = userCredential.user!.providerData[0].email;
           final uid = userCredential.user!.uid;
           final displayName = userCredential.user!.displayName;
           final status = 'Online';
-          final photoURL = userCredential.user!.photoURL; 
+          final photoURL = userCredential.user!.photoURL;
 
-          // Store user data in Firestore
+
           _fireStore.collection('users').doc(uid).set({
             'uid': uid,
             'email': email,
             'displayName': displayName,
             'status': status,
-            'profilePhoto': photoURL
-            
+            'profilePhoto': photoURL,
+            'deviceToken': deviceToken
           });
-          print(displayName);
+    
 
           return userCredential.user;
         }
