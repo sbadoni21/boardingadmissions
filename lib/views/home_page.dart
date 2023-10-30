@@ -1,7 +1,6 @@
 import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/components/dreamschool_component.dart';
 import 'package:boardingadmissions/components/sample_classes.dart';
-import 'package:boardingadmissions/services/notification/notification_service.dart';
 import 'package:boardingadmissions/views/chatapp.dart';
 import 'package:boardingadmissions/views/profile_page.dart';
 import 'package:boardingadmissions/views/schools_bottomNav.dart';
@@ -253,6 +252,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
       ),
     );
   }
+
 
   Widget buildHomePage() {
     return SizedBox(

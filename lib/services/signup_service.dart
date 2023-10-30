@@ -1,3 +1,4 @@
+import 'package:boardingadmissions/services/notification/notification_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -13,17 +14,23 @@ class signup_service {
     required String location,
   }) async {
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
       if (userCredential.user != null) {
         // Save additional user data to Firestore
-        await _fireStore
-          .collection('users')
-          .doc(userCredential.user!.uid)
-          .set({'uid': userCredential.user!.uid, 'email':email, 'displayName':name, 'status': 'Online', 'photoURL': "assets/image6.png"},SetOptions(merge: true));
+        final deviceToken = await NotificationService().getDeviceToken();
+        await _fireStore.collection('users').doc(userCredential.user!.uid).set({
+          'uid': userCredential.user!.uid,
+          'email': email,
+          'displayName': name,
+          'status': 'Online',
+          'photoURL': "assets/image6.png",
+          'deviceToken': deviceToken
+        }, SetOptions(merge: true));
 
         // User registration successful, you can navigate to a new page or perform other actions.
       }
