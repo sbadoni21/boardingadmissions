@@ -1,4 +1,4 @@
-import 'package:boardingadmissions/views/home_page.dart';
+
 import 'package:boardingadmissions/views/side_menu_bar.dart';
 import 'package:boardingadmissions/views/search_page.dart';
 

@@ -11,12 +11,11 @@ class ChatBubble extends StatelessWidget {
 
   String timeStampToDateTime() {
     tzdata.initializeTimeZones();
-    // Define the source and target time zones
     final String sourceTimeZone = 'UTC'; // UTC time
     final String targetTimeZone = 'Asia/Kolkata';
     final TZDateTime sourceTime = TZDateTime.fromMillisecondsSinceEpoch(
         getLocation(sourceTimeZone), timestamp.millisecondsSinceEpoch);
-    final TZDateTime istTime = sourceTime.toLocal();
+    final istTime = sourceTime.add(const Duration(hours: 5, minutes: 30));
     final String formattedISTTime = DateFormat('hh:mm a').format(istTime);
 
     print('UTC Time: ${sourceTime.toLocal()}');

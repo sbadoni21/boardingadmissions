@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io';
 
 import 'package:boardingadmissions/components/chatbubble.dart';
-
+import 'package:boardingadmissions/services/pdf_services.dart';
 import 'package:boardingadmissions/services/chat/chat_services.dart';
 import 'package:boardingadmissions/services/pdf_services.dart';
 import 'package:boardingadmissions/views/image_fullscreen_page.dart';
@@ -17,6 +18,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
+import 'package:file_picker/file_picker.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage(
@@ -55,6 +57,17 @@ class _ChatPageState extends State<ChatPage> {
     }
   }
 
+Future sendPDF(ChatService chatService, widget) async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.custom,
+    allowedExtensions: ['pdf'],
+  );
+  if (result != null && result.files.isNotEmpty) {
+    final PlatformFile platformFile = result.files.first;
+    final File pdfFile = File(platformFile.path as String);
+    await uploadPDF(pdfFile, chatService, widget);
+  }
+} 
   Future getImage() async {
     final ImagePicker _picker = ImagePicker();
     if (!isImagePickerActive) {
@@ -225,9 +238,9 @@ class _ChatPageState extends State<ChatPage> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   prefixIcon: IconButton(
-                    onPressed: () {
-                      SendPDF(_chatService, widget);
-                    },
+                    onPressed: () 
+                     => sendPDF(_chatService, widget)
+                    ,
                     icon: Icon(
                       Icons.attach_file,
                       color: Colors.blueAccent,
