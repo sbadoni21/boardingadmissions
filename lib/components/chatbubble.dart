@@ -17,9 +17,6 @@ class ChatBubble extends StatelessWidget {
         getLocation(sourceTimeZone), timestamp.millisecondsSinceEpoch);
     final istTime = sourceTime.add(const Duration(hours: 5, minutes: 30));
     final String formattedISTTime = DateFormat('hh:mm a').format(istTime);
-
-    print('UTC Time: ${sourceTime.toLocal()}');
-    print('IST Time: $formattedISTTime');
     return formattedISTTime;
   }
 

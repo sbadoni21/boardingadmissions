@@ -119,7 +119,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
         body: IndexedStack(index: _currentIndex, children: [
           buildHomePage(),
           ProfilePage(),
-          Schools(),
+          SchoolsBottomNavBar(),
           ChatApp(),
         ]),
         bottomNavigationBar: BottomNavigationBar(

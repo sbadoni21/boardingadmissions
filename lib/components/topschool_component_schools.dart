@@ -1,20 +1,20 @@
 import 'package:boardingadmissions/views/pdfView_page.dart';
 import 'package:flutter/material.dart';
 
-class NotesCards extends StatelessWidget {
+class TopSchoolCards extends StatelessWidget {
   final int itemCount;
 
-  const NotesCards({super.key, required this.itemCount});
+  const TopSchoolCards({super.key, required this.itemCount});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
       child: SizedBox(
-        height: 150, // Set the desired height for the horizontal list
+        height: 153, // Set the desired height for the horizontal list
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemExtent: 160, 
+          itemExtent: 160, // Set the width of each item
           itemCount: itemCount,
           itemBuilder: (context, index) {
             return const NoteCard();
@@ -42,8 +42,7 @@ class NoteCard extends StatelessWidget {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors
-                    .transparent, // Set the button's background color to transparent
-                // Adjust the padding as needed
+                    .transparent, 
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
                       10), // Adjust the border radius as needed

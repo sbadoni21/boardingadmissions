@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:js_interop';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io';
 
@@ -57,17 +58,18 @@ class _ChatPageState extends State<ChatPage> {
     }
   }
 
-Future sendPDF(ChatService chatService, widget) async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
-    type: FileType.custom,
-    allowedExtensions: ['pdf'],
-  );
-  if (result != null && result.files.isNotEmpty) {
-    final PlatformFile platformFile = result.files.first;
-    final File pdfFile = File(platformFile.path as String);
-    await uploadPDF(pdfFile, chatService, widget);
+  Future sendPDF(ChatService chatService, widget) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+    if (result != null && result.files.isNotEmpty) {
+      final PlatformFile platformFile = result.files.first;
+      final File pdfFile = File(platformFile.path as String);
+      await uploadPDF(pdfFile, chatService, widget);
+    }
   }
-} 
+
   Future getImage() async {
     final ImagePicker _picker = ImagePicker();
     if (!isImagePickerActive) {
@@ -238,9 +240,7 @@ Future sendPDF(ChatService chatService, widget) async {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   prefixIcon: IconButton(
-                    onPressed: () 
-                     => sendPDF(_chatService, widget)
-                    ,
+                    onPressed: () => sendPDF(_chatService, widget),
                     icon: Icon(
                       Icons.attach_file,
                       color: Colors.blueAccent,
@@ -444,7 +444,8 @@ Future sendPDF(ChatService chatService, widget) async {
         } else {
           for (var doc in snapshot.data!.docs) {
             Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-
+            
+            print(doc.jsify());
             DateTime? messageDate = (data['timestamp'] as Timestamp?)?.toDate();
 
             if (messageDate != null) {

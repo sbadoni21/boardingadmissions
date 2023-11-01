@@ -1,38 +1,39 @@
-import 'package:boardingadmissions/views/pdfView_page.dart';
 import 'package:flutter/material.dart';
 
-class NotesCards extends StatelessWidget {
-  final int itemCount;
+class ItemGrid extends StatelessWidget {
+  final int itemCount; // The total number of items
 
-  const NotesCards({super.key, required this.itemCount});
+  ItemGrid({required this.itemCount}); // Constructor to accept itemCount
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
-      child: SizedBox(
-        height: 150, // Set the desired height for the horizontal list
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemExtent: 160, 
-          itemCount: itemCount,
-          itemBuilder: (context, index) {
-            return const NoteCard();
-          },
-        ),
+    // Number of items in each row
+    final itemsInRow = 3;
+
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: itemsInRow,
       ),
+      itemBuilder: (BuildContext context, int index) {
+        return GridTile(
+          child: ItemCard(index + 1),
+        );
+      },
+      itemCount: itemCount,
     );
   }
 }
 
-class NoteCard extends StatelessWidget {
-  const NoteCard({super.key});
+class ItemCard extends StatelessWidget {
+  final int itemNumber;
+
+  ItemCard(this.itemNumber);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 150, // Adjust the width of each item
-      margin: const EdgeInsets.symmetric(horizontal: 10), // Add spacing
+      margin: const EdgeInsets.fromLTRB(12, 9, 12, 9),
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.elliptical(10, 10)),
         child: Card(

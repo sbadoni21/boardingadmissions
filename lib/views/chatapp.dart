@@ -18,11 +18,8 @@ class _ChatAppState extends State<ChatApp> {
   Widget build(BuildContext context) {
     return Scaffold(
         body:
-
-            // _buildchatSearchBar(),
             _buildUserList());
-    //   ],
-    // ),
+
   }
 
   Widget _buildUserList() {

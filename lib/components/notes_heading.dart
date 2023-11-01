@@ -4,7 +4,8 @@ class SectionHeader extends StatelessWidget {
   final String title;
   final VoidCallback onSeeAllPressed;
 
-  const SectionHeader({super.key, 
+  const SectionHeader({
+    super.key,
     required this.title,
     required this.onSeeAllPressed,
   });
@@ -20,7 +21,7 @@ class SectionHeader extends StatelessWidget {
             title,
             textAlign: TextAlign.start,
             style: const TextStyle(
-                color: Colors.black,
+                color: Colors.blueAccent,
                 overflow: TextOverflow.fade,
                 fontSize: 27,
                 fontWeight: FontWeight.w800),
