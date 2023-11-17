@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:js_interop';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io';
-
 import 'package:boardingadmissions/components/chatbubble.dart';
 import 'package:boardingadmissions/services/pdf_services.dart';
 import 'package:boardingadmissions/services/chat/chat_services.dart';
@@ -445,7 +443,7 @@ class _ChatPageState extends State<ChatPage> {
           for (var doc in snapshot.data!.docs) {
             Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
             
-            print(doc.jsify());
+     
             DateTime? messageDate = (data['timestamp'] as Timestamp?)?.toDate();
 
             if (messageDate != null) {

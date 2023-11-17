@@ -1,6 +1,6 @@
 import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/components/teacher_info_component.dart';
-import 'package:boardingadmissions/views/chat.dart';
+import 'package:boardingadmissions/views/enquirypage.dart';
 import 'package:boardingadmissions/views/faculty_page.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +13,9 @@ List facultymore = [
   {
     'image': "assets/photos/suggestions.png",
     'text': "Suggestion",
-    'route': const Chat()
+    'route': const EnquiryFormPage()
   },
-  {'image': "assets/photos/queries.png", 'text': "Queries", 'route': const Chat()}
+  {'image': "assets/photos/queries.png", 'text': "Queries", 'route': const EnquiryFormPage()}
 ];
 
 class FacultyDescription extends StatefulWidget {

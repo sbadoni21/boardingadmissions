@@ -3,7 +3,7 @@ import 'package:boardingadmissions/models/topschools_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-// Define TopSchoolsResult at the top level
+
 class TopSchoolsResult {
   final List<TopSchoolTile> topSchools;
   final String? error;
@@ -32,9 +32,9 @@ class _DescriptionPageState extends State<DescriptionPage> {
     try {
       await Image.network(imageUrl).image.resolve(ImageConfiguration.empty);
     } catch (e) {
-      // Handle the error, e.g., log the error
+
       print("Error loading image: $e");
-      // You can throw the error if you want to propagate it to the FutureBuilder's error field
+
       throw e;
     }
   }
@@ -54,7 +54,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
 
       setState(() {
         topSchools = school;
-        print(topSchools);
+
       });
     } catch (e) {
       print("Error fetching data: $e");

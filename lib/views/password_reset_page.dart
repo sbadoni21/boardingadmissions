@@ -30,7 +30,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                String email =""; // Get the user's email from where you've stored it (e.g., in a variable, TextEditingController, etc.)
+                String email ="";
                 final String newPassword = newPasswordController.text;
 
                 if (newPassword.isEmpty) {
@@ -38,7 +38,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     content: Text("Please enter both email and password"),
                   ));
                 } else {
-                  // Call a method to reset the password
+
                   bool passwordReset =
                       await AuthenticationServices().resetPassword(newPassword);
 
@@ -46,7 +46,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Password reset link sent via email'),
                     ));
-                    // You can navigate to the login page or perform other actions here.
+  
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(

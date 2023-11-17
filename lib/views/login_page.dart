@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:boardingadmissions/components/loading_screen.dart';
 import 'package:boardingadmissions/services/authentication_service.dart';
 import 'package:boardingadmissions/views/home_page.dart';
@@ -68,7 +67,7 @@ class LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                // Other login content with delayed appearance
+    
                 AnimatedOpacity(
                   duration: const Duration(
                       seconds: 1), // Duration for the fade-in animation

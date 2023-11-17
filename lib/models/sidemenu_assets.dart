@@ -1,4 +1,4 @@
-import 'package:boardingadmissions/views/chat.dart';
+import 'package:boardingadmissions/views/enquirypage.dart';
 import 'package:boardingadmissions/views/home_page.dart';
 import 'package:boardingadmissions/views/search_page.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ List<Map<String, dynamic>> sideMenuItems = [
     "key": "settings",
     'route': () {}
   },
-  {"icon": Icons.assistant, "text": "Enquiry", "key": "chat", 'route': Chat()},
+  {"icon": Icons.assistant, "text": "Enquiry", "key": "chat", 'route': EnquiryFormPage()},
   {
     "icon": Icons.logout,
     "text": "Logout",

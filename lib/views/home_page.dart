@@ -1,9 +1,15 @@
 import 'package:boardingadmissions/components/appbar.dart';
+import 'package:boardingadmissions/components/compatibilitycomponent.dart';
 import 'package:boardingadmissions/components/dreamschool_component.dart';
 import 'package:boardingadmissions/components/sample_classes.dart';
+import 'package:boardingadmissions/components/testpdf_component.dart';
+import 'package:boardingadmissions/views/enquirypage.dart';
 import 'package:boardingadmissions/views/chatapp.dart';
 import 'package:boardingadmissions/views/profile_page.dart';
 import 'package:boardingadmissions/views/schools_bottomNav.dart';
+import 'package:boardingadmissions/views/test.dart';
+import 'package:boardingadmissions/views/test_page.dart';
+import 'package:boardingadmissions/views/upi_payment.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -118,9 +124,10 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
         appBar: CustomAppBar(),
         body: IndexedStack(index: _currentIndex, children: [
           buildHomePage(),
-          ProfilePage(),
-          SchoolsBottomNavBar(),
-          ChatApp(),
+          const ProfilePage(),
+          const SchoolsBottomNavBar(),
+          const ChatApp(),
+          TestPage()
         ]),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -141,7 +148,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    elevation: _currentIndex == 0 ? 4 : 0,
+                    elevation: _currentIndex == 0 ? 5 : 0,
                     shadowColor: Colors.black,
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -170,7 +177,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  elevation: _currentIndex == 1 ? 4 : 0,
+                  elevation: _currentIndex == 1 ? 5 : 0,
                   shadowColor: Colors.black,
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
@@ -198,7 +205,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  elevation: _currentIndex == 2 ? 4 : 0,
+                  elevation: _currentIndex == 2 ? 5 : 0,
                   shadowColor: Colors.black,
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
@@ -226,7 +233,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  elevation: _currentIndex == 3 ? 4 : 0,
+                  elevation: _currentIndex == 3 ? 5 : 0,
                   shadowColor: Colors.black,
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
@@ -247,12 +254,40 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
               ),
               label: '',
             ),
+            BottomNavigationBarItem(
+              icon: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 4;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  elevation: _currentIndex == 4 ? 5 : 0,
+                  shadowColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+
+                  // Elevation when selected
+                ),
+                child: Column(children: [
+                  Icon(Icons.chat_bubble_outline,
+                      color: _currentIndex == 4 ? Colors.blue : Colors.grey),
+                  Text(
+                    "test",
+                    style: TextStyle(
+                        color: _currentIndex == 4 ? Colors.blue : Colors.grey),
+                  )
+                ]),
+              ),
+              label: '',
+            ),
           ],
         ),
       ),
     );
   }
-
 
   Widget buildHomePage() {
     return SizedBox(
@@ -284,11 +319,33 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 ),
               ),
               onPressed: () {
-                // Handle the "Join" button press
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UpiPaymentScreen()));
               },
               child: const Text(
                 'Join Now',
               ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(20, 30, 0, 0),
+            alignment: Alignment.centerLeft,
+            child: const Text(
+              'BCT',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Colors.blue,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          OptionsColumn(),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 40),
+            child: Divider(
+              thickness: 0.5,
+              color: Colors.blue,
             ),
           ),
           const SizedBox(height: 25),
@@ -305,7 +362,7 @@ class HomePageState extends State<HomePage> with WidgetsBindingObserver {
             ),
           ),
           const SizedBox(height: 20),
-          SampleClasses(),
+          TestPdfComponentPage(),
           const Padding(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 40),
             child: Divider(
