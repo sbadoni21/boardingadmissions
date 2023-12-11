@@ -426,9 +426,6 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _buildMessageList() {
-    List<Map<String, dynamic>> messages = [];
-    DateTime? currentDate;
-
     return StreamBuilder<QuerySnapshot>(
       stream: _chatService.getMessages(
         _firebaseAuth.currentUser!.uid,
@@ -440,10 +437,12 @@ class _ChatPageState extends State<ChatPage> {
         } else if (snapshot.hasError) {
           return const Text('Error');
         } else {
+          List<Map<String, dynamic>> messages = [];
+
+          DateTime? currentDate;
           for (var doc in snapshot.data!.docs) {
             Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-            
-     
+
             DateTime? messageDate = (data['timestamp'] as Timestamp?)?.toDate();
 
             if (messageDate != null) {

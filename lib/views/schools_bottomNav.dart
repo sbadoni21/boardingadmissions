@@ -1,4 +1,4 @@
-import 'package:boardingadmissions/components/TopSchool_component_Schools.dart';
+import 'package:boardingadmissions/components/topschool_component_schools.dart';
 import 'package:boardingadmissions/components/appbar.dart';
 import 'package:boardingadmissions/components/gridview_component.dart';
 import 'package:boardingadmissions/components/notes_cards.dart';
