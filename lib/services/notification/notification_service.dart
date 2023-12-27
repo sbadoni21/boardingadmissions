@@ -125,7 +125,7 @@ class NotificationService {
   }
 
   Future<void> showNotification(RemoteMessage message) async {
-    print("=========ShowNotification");
+
     AndroidNotificationChannel androidNotificationChannel =
         AndroidNotificationChannel(
             Random.secure().nextInt(100000).toString(), "Boarding Admissions",
@@ -151,9 +151,7 @@ class NotificationService {
   }
 
   void handleMessage(BuildContext context, RemoteMessage message) {
-    print("========Handling message");
-    print(message.data);
-    print(message.data['type'] == "Chat");
+
     if (message.data['type'] == "Chat") {
       Navigator.of(context).pushNamed('/ChatApp');
     }

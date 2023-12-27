@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'dart:io';
 import 'package:boardingadmissions/components/chatbubble.dart';
 import 'package:boardingadmissions/services/pdf_services.dart';
 import 'package:boardingadmissions/services/chat/chat_services.dart';
-import 'package:boardingadmissions/services/pdf_services.dart';
+
 import 'package:boardingadmissions/views/image_fullscreen_page.dart';
-import 'package:boardingadmissions/views/pdfView_page.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
