@@ -25,7 +25,7 @@ class _MenuScreenState extends State<MenuScreen> {
   }
 
   void fetchDisplayName() async {
-    // Replace 'users' with the path to your collection containing user data
+   
     final userDoc = FirebaseFirestore.instance
         .collection('users')
         .doc(_firebaseAuth.currentUser!.uid);
@@ -37,7 +37,7 @@ class _MenuScreenState extends State<MenuScreen> {
           displayName = userData['displayName'];
           profilePhoto = userData['profilePhoto'];
 
-          // Adjust the field name as per your database structure
+
         });
       }
     }).catchError((error) {

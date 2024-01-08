@@ -37,13 +37,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     'assets/videos/cat.mp4',
     'assets/videos/cat.mp4',
     'assets/videos/cat.mp4',
-    // Add more video URLs as needed
+ 
   ];
   bool isExpanded = false;
   int currentVideoIndex = 0;
 
   String _formatDuration(Duration duration) {
-    // Format the duration as 'mm:ss'
+
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     String minutes = twoDigits(duration.inMinutes.remainder(60));
     String seconds = twoDigits(duration.inSeconds.remainder(60));
@@ -102,7 +102,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     _controller.dispose();
   }
 
-  double sliderValue = 0.0; // Declare a variable to control the slider value
+  double sliderValue = 0.0; 
 
   @override
   Widget build(BuildContext context) {
